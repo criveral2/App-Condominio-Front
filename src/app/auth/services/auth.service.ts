@@ -58,7 +58,6 @@ export class AuthService {
         localStorage.setItem('token', responseCode);
         localStorage.setItem('username', email);
         localStorage.setItem('password', password);
-        console.log(data, responseCode);
       }),
 
       // Convertimos a booleano para cumplir con la firma del método

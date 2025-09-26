@@ -1,14 +1,15 @@
 
 
 export interface User {
+    data:            User[] | [];
     idUser:          number;
     name:            string;
     usename:         string;
     email:           string;
     phone:           string;
-    typeUser:        string;
+    idTypeUser:      string;
     warnings:        any[];
-    roleAssignation: RoleAssignation;
+    roleAssignation: RoleAssignation | null;
     ci:              string;
 }
 

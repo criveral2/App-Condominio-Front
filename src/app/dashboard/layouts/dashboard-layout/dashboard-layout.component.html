@@ -1,13 +1,15 @@
-<h1>Dashboard</h1>
-<hr>
-<h3>
-    User
-</h3>
-<pre>{{ user() | json}}</pre>
-
-<br>
-<!-- <span routerLink="/auth/login" > Ir al login</span> -->
-
-<button (click)=" onLogout()" >
-    Cerrar Sesion
-</button>
+<!-- component -->
+<div class="min-h-screen bg-gray-50/50">
+  <app-sidebar/>
+  <div class="p-4 xl:ml-80">
+    <nav class="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
+        <app-header/>
+    </nav>
+    <div class="mt-6">
+       <router-outlet></router-outlet>
+    </div>
+    <div class="text-blue-gray-600">
+        <app-footer/>
+    </div>
+  </div>
+</div>
