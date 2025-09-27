@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { User } from '../../../auth/interfaces';
 
 @Component({
   selector: 'app-header',
@@ -13,14 +14,14 @@ export class HeaderComponent {
    private authService = inject( AuthService );
    private router = inject( Router );
    private activatedRoute = inject( ActivatedRoute );
-
-   currentRoute: string = '';
+   public currentRoute: string = '';
+   
 
    constructor(){
     this.ngOnInit();
    }
 
-    ngOnInit() {
+  ngOnInit() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -33,6 +34,9 @@ export class HeaderComponent {
         }
       });
   }
+  get usuario(): User | null {
+       return this.authService.currentUser(); // se obtiene dinámicamente del signal
+     }
 
 
   onLogout(){

@@ -1,0 +1,65 @@
+<!-- app-informacion-administrador.component.html -->
+<div class="relative" #container>
+  <!-- Botón que abre el popover -->
+  <button (click)="togglePopover()" 
+          class="w-10 h-10 rounded-lg text-gray-500 hover:bg-gray-100 flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+      <path fill-rule="evenodd" d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z" clip-rule="evenodd"></path>
+    </svg>
+  </button>
+
+  <!-- Popover responsive -->
+<div *ngIf="isOpen"
+     class="absolute top-full mt-2 w-72 max-h-[400px] overflow-y-auto bg-white shadow-lg rounded-xl p-4 z-50
+            left-full translate-x-2   <!-- móvil: abre a la derecha -->
+            sm:right-0 sm:left-auto sm:translate-x-0  <!-- sm y mayores: vuelve a la izquierda -->
+            md:w-96 md:max-h-[500px]">
+
+              <!-- Título del popover -->
+    <h6 class="text-lg font-semibold text-gray-900 mb-3 text-center">
+        Administración
+    </h6>
+<hr class="border-gray-300 mb-3">
+    <div class="flex flex-col gap-3">
+           
+      <div class="group flex items-start gap-4 rounded-lg p-3 hover:bg-gray-50">
+        <div class="flex-none flex items-center justify-center w-12 h-12 bg-white-50 rounded-lg ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" class="w-6 h-6 text-gray-600 group-hover:text-indigo-600">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 21a8.25 8.25 0 0115 0" />
+            </svg>
+        </div>
+        <div>
+         <a  class="font-semibold text-gray-900">Administrador</a>
+          <p class="text-sm text-gray-600 mt-1">{{ usuario?.name }}</p>
+        </div>
+      </div>
+
+       
+      <div class="group flex items-start gap-4 rounded-lg p-3 hover:bg-gray-50">
+        <div class="flex-none flex items-center justify-center w-12 h-12 bg-white-50 rounded-lg ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6 text-gray-600 group-hover:text-indigo-600">
+            <path d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <a class="font-semibold text-gray-900">Correo electronico</a>
+          <p class="text-sm text-gray-600 mt-1">{{ usuario?.email }}</p>
+        </div>
+      </div>
+
+      <div class="group flex items-start gap-4 rounded-lg p-3 hover:bg-gray-50">
+        <div class="flex-none flex items-center justify-center w-12 h-12 bg-white-50 rounded-lg ">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" 
+                class="w-6 h-6 text-gray-600 group-hover:text-indigo-600">
+                <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" fill-rule="evenodd" />
+            </svg>
+        </div>
+        <div>
+         <a  class="font-semibold text-gray-900">Telefono</a>
+          <p class="text-sm text-gray-600 mt-1">{{ usuario?.phone }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

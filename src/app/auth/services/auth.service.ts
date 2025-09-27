@@ -27,7 +27,6 @@ export class AuthService {
 
     if (emailres && passwordres) {
       this.login(emailres, passwordres).subscribe({
-        next: (res) => console.log('Login ok'),
         error: (err) => console.error('Error al reautenticar:', err)
       });
     }else{

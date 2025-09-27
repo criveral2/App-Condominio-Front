@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../auth/interfaces';
 import { map, Observable, of, tap } from 'rxjs';
 import { ApiResponseUser } from '../interfaces/usuario/create-response.interface';
+import { UpdateUser, UpdateUserData } from '../interfaces/usuario/update-user.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,6 @@ export class ClientService {
 
     getUsers():Observable<User>{
       const url : string = `${this.baseUrl}/all`;
-      console.log(url);
       return this.http.get<User>(url);
     }
 
@@ -32,7 +32,20 @@ export class ClientService {
         // Si todo va bien, retorna el usuario
         return resp.data as User;
       }),
-      tap(user => console.log('Usuario creado', user))
+    );
+  }
+
+    updateUser(user: UpdateUserData): Observable<UpdateUserData> {
+    const url = `${this.baseUrl}/update`;
+    return this.http.put<UpdateUser>(url, user).pipe(
+      map(resp => {
+        if (resp.responseCode !== 'USER-0003') {
+          // Si hay error, lanza excepción
+          throw new Error(resp.errorMessage || 'Error desconocido');
+        }
+        // Si todo va bien, retorna el usuario
+        return resp.data as UpdateUserData;
+      })
     );
   }
 

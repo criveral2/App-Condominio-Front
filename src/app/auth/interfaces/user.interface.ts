@@ -7,7 +7,7 @@ export interface User {
     usename:         string;
     email:           string;
     phone:           string;
-    idTypeUser:      string;
+    typeUser:      string;
     warnings:        any[];
     roleAssignation: RoleAssignation | null;
     ci:              string;

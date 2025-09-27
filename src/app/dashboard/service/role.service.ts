@@ -14,11 +14,7 @@ export class RoleService {
 
   getTipoUsuario():Observable<RoleType>{
     const url : string = `${this.baseUrl}/type/all`;
-    console.log(url);
-    return this.http.get<RoleType>(url)
-      .pipe(
-        tap( resp => console.log( {resp} ))
-    )
+    return this.http.get<RoleType>(url);
   }
 
 
