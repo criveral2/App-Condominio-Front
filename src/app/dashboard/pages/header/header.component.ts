@@ -36,10 +36,8 @@ export class HeaderComponent {
   }
   get usuario(): User | null {
        return this.authService.currentUser(); // se obtiene dinámicamente del signal
-     }
-
-
-  onLogout(){
-    this.authService.logout();
   }
+
+
+
 }
