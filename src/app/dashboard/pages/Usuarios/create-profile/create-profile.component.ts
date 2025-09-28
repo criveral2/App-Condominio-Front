@@ -92,5 +92,6 @@ export class CreateProfileComponent implements OnInit {
 
    onClose() {
     this.close.emit();
+    this.myForm.reset();
    }
 }

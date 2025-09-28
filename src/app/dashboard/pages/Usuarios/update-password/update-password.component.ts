@@ -18,9 +18,9 @@ export class UpdatePasswordComponent {
     @Output() close = new EventEmitter<void>();
     @Output() usuarioActualizado = new EventEmitter<void>();
   
-    private fb               = inject( FormBuilder );
+    private fb = inject( FormBuilder );
     public tipoUsuario: RoleType | undefined;
-    constructor( ) { }
+    constructor( ) { console.log("Constructor Update Password", this.usuario); }
   
 
     // 👀 Cuando cambie el input usuario
@@ -34,8 +34,6 @@ export class UpdatePasswordComponent {
     }
 
   public myForm: FormGroup = this.fb.group({
-    name: [ '', [Validators.required, Validators.minLength(3)] ],
-    username: [ '', [Validators.required] ],
     password: [ '', [ Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)]],
     repeatPassword: ['', [Validators.required, this.matchPasswordValidator.bind(this)]], 
   });   // << validador extra
@@ -76,17 +74,20 @@ export class UpdatePasswordComponent {
   }
 
   
-  
-  
   onUpdate(): void {
+     console.log("Actualizar Contraseña 1");
     if (this.myForm.invalid) return;
     if (!this.usuario) return;
     console.log("USUARIO A ACTUALIZAR Constraseña", this.usuario);
+     this.myForm.reset();
+     this.close.emit();
 
   }
   
   onClose() {
   this.close.emit();
+  this.myForm.reset();
   }
+  
 
 }

@@ -1,3 +1,5 @@
+
+
 <!-- app-informacion-administrador.component.html -->
 <div class="relative" #container>
   <!-- Botón que abre el popover -->
@@ -14,10 +16,10 @@
   <!-- Popover compacto -->
   <div *ngIf="isOpen" class="absolute top-full mt-1 w-56 max-h-64 overflow-y-auto bg-white shadow-md rounded-lg p-3 z-50
             right-full translate-x-1 md:w-47 md:max-h-80">
-
     <div class="flex flex-col gap-2">
      <!-- Security -->
-      <div class="group flex items-center gap-3 rounded-md p-2 hover:bg-white-50 cursor-pointer">
+      <div class="group flex items-center gap-3 rounded-md p-2 hover:bg-white-50 cursor-pointer"
+        (click)="openPasswordProfile()">
         <div class="flex-none flex items-center justify-center w-10 h-10 bg-white rounded-md">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5 text-gray-600 group-hover:text-indigo-600">
             <path
@@ -43,9 +45,12 @@
           <a class="font-medium text-gray-900 text-sm">Cerrar sesión</a>
         </div>
       </div>
-
- 
-
     </div>
   </div>
 </div>
+
+<app-update-password
+    [isOpenUpdatePasswordProfile]="isOpenUpdatePasswordProfile" 
+    [usuario]="usuario"
+    (close)="isOpenUpdatePasswordProfile = false">
+</app-update-password>

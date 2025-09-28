@@ -11,11 +11,12 @@ export class PersonalConfigurationComponent {
   public isOpen = false;
   private authService = inject( AuthService );
   private elRef = inject( ElementRef );
+  public isOpenUpdatePasswordProfile = false;
 
 
 
-  get usuario(): User | null {
-    return this.authService.currentUser(); // se obtiene dinámicamente del signal
+  get usuario(): User {
+    return this.authService.currentUser()!; // se obtiene dinámicamente del signal
   }
 
   togglePopover() {
@@ -28,6 +29,11 @@ export class PersonalConfigurationComponent {
     if (!clickedInside) {
       this.isOpen = false;
     }
+  }
+
+  openPasswordProfile() {
+    this.isOpenUpdatePasswordProfile = true;
+    this.isOpen = false;
   }
 
 
