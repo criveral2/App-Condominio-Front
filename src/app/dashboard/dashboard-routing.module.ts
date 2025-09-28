@@ -4,6 +4,7 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PersonalProfileComponent } from './pages/Usuarios/personal-profile/personal-profile.component';
+import { AreasComunesComponent } from './pages/areas-comunes/areas-comunes/areas-comunes.component';
 
 const routes: Routes = [
 
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'general', component: DashboardComponent, data: { title: 'General' }},
       { path: 'residentes', component: ProfileComponent, data: { title: 'Residentes' }},
       { path: 'perfil', component: PersonalProfileComponent, data: { title: 'perfil' }},
+      { path: 'areacomun', component: AreasComunesComponent, data: { title: 'Areas Comunes' }},
       { path: '**', redirectTo: 'general'}
     ]
   }

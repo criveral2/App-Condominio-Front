@@ -3,8 +3,8 @@ import { User } from '../../../../auth/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoleService } from '../../../service/role.service';
 import { ClientService } from '../../../service/client.service';
-import { UpdateUserData } from '../../../interfaces/usuario/update-user.interfaces';
-import { RoleType } from '../../../interfaces/usuario/tipo-usuario.interfaces';
+import { UpdateUserData } from '../../../interfaces/usuario/update-user.interface';
+import { RoleType } from '../../../interfaces/usuario/tipo-usuario.interface';
 import Swal from 'sweetalert2';
 
 @Component({

@@ -8,7 +8,6 @@ import '@tailwindplus/elements';
 
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { TablesComponent } from './pages/tables/tables.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
@@ -19,6 +18,7 @@ import { InformacionAdministradorComponent } from './pages/Usuarios/informacion-
 import { UpdatePasswordComponent } from './pages/Usuarios/update-password/update-password.component';
 import { PersonalProfileComponent } from './pages/Usuarios/personal-profile/personal-profile.component';
 import { PersonalConfigurationComponent } from './pages/Usuarios/personal-configuration/personal-configuration.component';
+import { AreasComunesComponent } from './pages/areas-comunes/areas-comunes/areas-comunes.component';
 
 
 
@@ -26,7 +26,6 @@ import { PersonalConfigurationComponent } from './pages/Usuarios/personal-config
   declarations: [
     DashboardLayoutComponent,
     ProfileComponent,
-    TablesComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
@@ -37,6 +36,7 @@ import { PersonalConfigurationComponent } from './pages/Usuarios/personal-config
     UpdatePasswordComponent,
     PersonalProfileComponent,
     PersonalConfigurationComponent,
+    AreasComunesComponent,
   ],
   imports: [
     CommonModule,

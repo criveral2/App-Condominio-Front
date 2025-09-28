@@ -2,7 +2,7 @@ import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RoleService } from '../../../service/role.service';
 import { ClientService } from '../../../service/client.service';
-import { RoleType } from '../../../interfaces/usuario/tipo-usuario.interfaces';
+import { RoleType } from '../../../interfaces/usuario/tipo-usuario.interface';
 import { User } from '../../../../auth/interfaces';
 import Swal from 'sweetalert2';
 

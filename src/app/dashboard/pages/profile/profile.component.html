@@ -7,16 +7,16 @@
 <div class="flex flex-col ">
 
   <!-- Header con botón -->
-  <div class="flex justify-between items-center p-2  ">
+  <div class="flex justify-between items-center p-2 bg-white shadow-sm">
+
     <h2 class="text-xl font-bold text-gray-700">Lista de Residentes</h2>
-   
-  
     <button 
       (click)="openModal = true"
       class="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
     >
       <i class="material-icons-outlined mr-2">add</i> Agregar
     </button>
+  </div>
 
 
     </div>
@@ -87,7 +87,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    
   <div class="mt-4 flex justify-center">
     <pagination-controls
       previousLabel=""

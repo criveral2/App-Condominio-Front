@@ -4,8 +4,8 @@ import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { RoleService } from '../../../service/role.service';
 import { ClientService } from '../../../service/client.service';
-import { RoleType } from '../../../interfaces/usuario/tipo-usuario.interfaces';
-import { UpdateUser, UpdateUserData } from '../../../interfaces/usuario/update-user.interfaces';
+import { RoleType } from '../../../interfaces/usuario/tipo-usuario.interface';
+import { UpdateUser, UpdateUserData } from '../../../interfaces/usuario/update-user.interface';
 import { User } from '../../../../auth/interfaces';
 
 

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../auth/interfaces';
 import { map, Observable, of, tap } from 'rxjs';
 import { ApiResponseUser } from '../interfaces/usuario/create-response.interface';
-import { UpdateUser, UpdateUserData } from '../interfaces/usuario/update-user.interfaces';
+import { UpdateUser, UpdateUserData } from '../interfaces/usuario/update-user.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RoleType } from '../interfaces/usuario/tipo-usuario.interfaces';
+import { RoleType } from '../interfaces/usuario/tipo-usuario.interface';
 import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
