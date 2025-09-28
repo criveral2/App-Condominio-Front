@@ -49,7 +49,7 @@ export class ProfileComponent {
     });
   }
 
-  openUpdateProfile(usuario: User, soloLectura: boolean = false) {
+  openUpdateProfile(usuario: User, soloLectura: boolean = false ) {
     this.usuario = usuario;
     this.isOpenUpdateProfile = true;
     this.soloLectura = soloLectura;  // 👈 flag de visualización
