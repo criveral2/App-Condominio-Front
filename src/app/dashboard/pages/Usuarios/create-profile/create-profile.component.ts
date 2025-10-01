@@ -67,6 +67,8 @@ export class CreateProfileComponent implements OnInit {
           return 'Debe tener al menos 8 caracteres, una mayúscula y un caracter especial';
         case 'passwordMismatch':
           return 'Las contraseñas no coinciden';
+        case 'email':
+          return 'Ingrese un correo electrónico válido';
       }
     }
     return null;
@@ -80,7 +82,6 @@ export class CreateProfileComponent implements OnInit {
       next: () => {
         this.usuarioCreado.emit(); // notifica al padre
         Swal.fire('Éxito', 'Usuario creado correctamente', 'success');
-        this.myForm.reset({ idTypeUser: '1' });
         this.onClose();
       },
       error: (message) => {
@@ -92,6 +93,6 @@ export class CreateProfileComponent implements OnInit {
 
    onClose() {
     this.close.emit();
-    this.myForm.reset();
+    this.myForm.reset({ idTypeUser: '1' });
    }
 }

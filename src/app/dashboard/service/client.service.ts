@@ -35,7 +35,7 @@ export class ClientService {
     );
   }
 
-    updateUser(user: UpdateUserData): Observable<UpdateUserData> {
+  updateUser(user: UpdateUserData): Observable<UpdateUserData> {
     const url = `${this.baseUrl}/update`;
     return this.http.put<UpdateUser>(url, user).pipe(
       map(resp => {

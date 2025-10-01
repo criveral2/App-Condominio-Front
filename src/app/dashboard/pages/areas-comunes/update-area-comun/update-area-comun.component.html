@@ -1,0 +1,79 @@
+<div *ngIf="isOpenUpdateAreaComun" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div
+        class="relative bg-white rounded-xl shadow-xl w-[95%] sm:w-[500px] md:w-[650px] lg:w-[650px] max-h-[96vh] overflow-y-auto p-6">
+        <!-- Botón de cerrar (X) -->
+        <button (click)="onClose()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition">
+            ✕
+        </button>
+
+        <!-- Título -->
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">
+              {{ soloLectura ? 'Área común' : 'Actualizar área común' }}
+        </h2>
+        <hr class="mb-4">
+
+        <!-- Formulario -->
+        <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="onUpdate()" class="space-y-4">
+
+            <!-- Código del usuario -->
+            <div>
+                <label for="id" class="block text-sm font-medium text-gray-600 mb-1">Código del área común</label>
+                <span id="id"
+                    class="block w-full rounded-lg border border-gray-300 p-2 bg-gray-100 text-gray-700">{{areacomun?.id}}</span>
+            </div>
+
+            <!-- Descripción -->
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-600">
+                    Descripción del área
+                </label>
+                <textarea id="description" name="description" formControlName="description"
+                    placeholder="Escribe una descripción" rows="4"
+                    class="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </textarea>
+                <span *ngIf="isValid('description')" class="text-xs text-red-500">
+                    {{ getFieldError('description') }}
+                </span>
+            </div>
+
+
+
+            <!-- seccion  y tipo area -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="seccion" class="block text-sm font-medium text-gray-600">Sección</label>
+                    <select id="seccion" name="seccion" formControlName="idSection" placeholder="Seleccione una sección"
+                        class="mt-1 block w-full rounded-lg border border-gray-300 p-2 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <option *ngFor="let tipoArea of tipoArea?.data" [value]="tipoArea.id">{{tipoArea.type}}
+                        </option>
+                    </select>
+                    <span *ngIf="isValid('idSection')"
+                        class="text-xs text-red-500">{{getFieldError('idSection')}}</span>
+                </div>
+                <div>
+                    <label for="tipoArea" class="block text-sm font-medium text-gray-600">Tipo de área </label>
+                    <select id="tipoArea" name="tipoArea" formControlName="idTypeArea"
+                        placeholder="Seleccione un tipo de área"
+                        class="mt-1 block w-full rounded-lg border border-gray-300 p-2 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <option *ngFor="let seccion of seccion?.data" [value]="seccion.id">{{seccion.type}}
+                        </option>
+                    </select>
+                    <span *ngIf="isValid('idTypeArea')"
+                        class="text-xs text-red-500">{{getFieldError('idTypeArea')}}</span>
+                </div>
+            </div>
+
+
+            <!-- Botones -->
+            <div class="flex justify-end space-x-3 pt-4">
+                <button type="button" (click)="onClose()"
+                    class="px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100">
+                    Cancelar
+                </button>
+                <button *ngIf="!soloLectura" type="submit" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

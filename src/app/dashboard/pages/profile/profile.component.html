@@ -10,93 +10,76 @@
   <div class="flex justify-between items-center p-2 bg-white shadow-sm">
 
     <h2 class="text-xl font-bold text-gray-700">Lista de Residentes</h2>
-    <button 
-      (click)="openModal = true"
-      class="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
-    >
+    <button (click)="openModal = true"
+      class="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
       <i class="material-icons-outlined mr-2">add</i> Agregar
     </button>
   </div>
 
 
-    </div>
-      <app-create-profile 
-        [isOpen]="openModal" 
-        (close)="openModal = false"
-        (usuarioCreado)="cargaResidentes()">
-      </app-create-profile>
+</div>
+<app-create-profile [isOpen]="openModal" (close)="openModal = false" (usuarioCreado)="cargaResidentes()">
+</app-create-profile>
 
-      <app-update-profile
-        [isOpenUpdateProfile]="isOpenUpdateProfile" 
-        [usuario]="usuario"
-        [soloLectura]="soloLectura"
-        (close)="isOpenUpdateProfile = false"
-        (usuarioActualizado)="cargaResidentes()">
-      </app-update-profile>
+<app-update-profile [isOpenUpdateProfile]="isOpenUpdateProfile" [usuario]="usuario" [soloLectura]="soloLectura"
+  (close)="isOpenUpdateProfile = false" (usuarioActualizado)="cargaResidentes()">
+</app-update-profile>
 
-      <app-update-password
-        [isOpenUpdatePasswordProfile]="isOpenUpdatePasswordProfile" 
-        [usuario]="usuario"
-        (close)="isOpenUpdatePasswordProfile = false"
-        (usuarioActualizado)="cargaResidentes()">
-      </app-update-password>
+<app-update-password [isOpenUpdatePasswordProfile]="isOpenUpdatePasswordProfile" [usuario]="usuario"
+  (close)="isOpenUpdatePasswordProfile = false" (usuarioActualizado)="cargaResidentes()">
+</app-update-password>
 
-    <!-- Contenedor principal que crece -->
-    <div class="flex-grow overflow-auto p-4">
-      <table class="table text-gray-700 border-separate space-y-6 text-sm w-full">
-        <thead class="bg-gray-200 text-gray-600">
-          <tr>
-            <th class="p-3">Nombre</th>
-            <th class="p-3 text-left">Correo</th>
-            <th class="p-3 text-left">Telefono</th>
-            <th class="p-3 text-left">Estado</th>
-            <th class="p-3 text-left">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-white shadow-md"  *ngFor="let usuario of usuarios | paginate: { itemsPerPage: pageSize, currentPage: page }">
-            <td class="p-3">
-              <div class="flex items-center">
-                <img class="rounded-full h-12 w-12 object-cover"
-                  src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
-                  alt="unsplash image">
-                <div class="ml-3">
-                  <div class="font-semibold">{{usuario.name}}</div>
-                </div>
-              </div>
-            </td>
-            <td class="p-3">{{usuario.email}}</td>
-            <td class="p-3 font-bold">{{usuario.phone}}</td>
-            <td class="p-3">
-              <span class="bg-green-400 text-white rounded-md px-2">Activo</span>
-            </td>
-            <td class="p-3 flex space-x-2">
-              <a class="text-gray-500 hover:text-gray-700" (click)="openPasswordProfile(usuario)">
-                <i class="material-icons-outlined">fingerprint</i>
-              </a>
-              <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateProfile(usuario, true)" >
-                <i class="material-icons-outlined">visibility</i>
-              </a>
-              <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateProfile(usuario)">
-                <i class="material-icons-outlined">edit</i>
-              </a>
-              <a href="#" class="text-gray-500 hover:text-red-600">
-                <i class="material-icons-round">delete_outline</i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    
-  <div class="mt-4 flex justify-center">
-    <pagination-controls
-      previousLabel=""
-      nextLabel=""
-      class="flex gap-2 text-blue-600 "
-      (pageChange)="page = $event" >
-    </pagination-controls>
-  </div>
+<!-- Contenedor principal que crece -->
+<div class="flex-grow overflow-auto p-4">
+  <table class="table text-gray-700 border-separate space-y-6 text-sm w-full">
+    <thead class="bg-gray-200 text-gray-600">
+      <tr>
+        <th class="p-3">Nombre</th>
+        <th class="p-3 text-left">Correo</th>
+        <th class="p-3 text-left">Telefono</th>
+        <th class="p-3 text-left">Estado</th>
+        <th class="p-3 text-left">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-white shadow-md"
+        *ngFor="let usuario of usuarios | paginate: { itemsPerPage: pageSize, currentPage: page }">
+        <td class="p-3">
+          <div class="flex items-center">
+            <img class="rounded-full h-12 w-12 object-cover"
+              src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" alt="unsplash image">
+            <div class="ml-3">
+              <div class="font-semibold">{{usuario.name}}</div>
+            </div>
+          </div>
+        </td>
+        <td class="p-3">{{usuario.email}}</td>
+        <td class="p-3 font-bold">{{usuario.phone}}</td>
+        <td class="p-3">
+          <span class="bg-green-400 text-white rounded-md px-2">Activo</span>
+        </td>
+        <td class="p-3 flex space-x-2">
+          <a class="text-gray-500 hover:text-gray-700" (click)="openPasswordProfile(usuario)">
+            <i class="material-icons-outlined">fingerprint</i>
+          </a>
+          <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateProfile(usuario, true)">
+            <i class="material-icons-outlined">visibility</i>
+          </a>
+          <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateProfile(usuario)">
+            <i class="material-icons-outlined">edit</i>
+          </a>
+          <a href="#" class="text-gray-500 hover:text-red-600">
+            <i class="material-icons-round">delete_outline</i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
+<div class="mt-4 flex justify-center">
+  <pagination-controls previousLabel="" nextLabel="" class="flex gap-2 text-blue-600 " (pageChange)="page = $event">
+  </pagination-controls>
 </div>
 
 <style>

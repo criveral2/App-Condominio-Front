@@ -1,11 +1,10 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
-import { Router } from '@angular/router';
 import { RoleService } from '../../../service/role.service';
 import { ClientService } from '../../../service/client.service';
 import { RoleType } from '../../../interfaces/usuario/tipo-usuario.interface';
-import { UpdateUser, UpdateUserData } from '../../../interfaces/usuario/update-user.interface';
+import { UpdateUserData } from '../../../interfaces/usuario/update-user.interface';
 import { User } from '../../../../auth/interfaces';
 
 
@@ -66,10 +65,10 @@ export class UpdateProfileComponent implements OnInit{
     public myForm: FormGroup = this.fb.group({
       name: [ '', [Validators.required, Validators.minLength(3)], [] ],
       username: [ '', [Validators.required], [] ],
-      email: [ '', [Validators.required], [] ],
+      email: ['', [Validators.required, Validators.email]],
       ci: [ '', [Validators.required], [] ],
       phone: [ '', [Validators.required], [] ],
-      idTypeUser: [ '1', [Validators.required], [] ],
+      idTypeUser: [ '3', [Validators.required], [] ],
      });
   
      isValid(field: string): boolean | null {
@@ -86,6 +85,8 @@ export class UpdateProfileComponent implements OnInit{
             return 'Este campo es requerido';
           case 'minlength':
             return `Mínimo ${errors['minlength'].requiredLength} caracteres`;
+          case 'email':
+            return 'Ingrese un correo electrónico válido';
         }
       }
       return null;
@@ -118,7 +119,7 @@ export class UpdateProfileComponent implements OnInit{
       next: () => {
         this.usuarioActualizado.emit(); // notifica al padre
         Swal.fire('Éxito', 'Usuario actualizado correctamente', 'success');
-        this.myForm.reset({ idTypeUser: '1' });
+        this.myForm.reset({ idTypeUser: '3' });
         this.onClose();
       },
       error: (message) => {
@@ -127,8 +128,6 @@ export class UpdateProfileComponent implements OnInit{
       }
     });
   }
-  
-  
   
      onClose() {
       this.close.emit();

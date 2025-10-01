@@ -10,3 +10,12 @@ export interface AreaComunData {
     commonAreaSection:     number;
     commonAreaTypeArea:    string;
 }
+
+// Para enviar datos (POST)
+export interface AreaComunCreate {
+  description: string;
+  idSection: number;
+  idTypeArea: string;
+}
+
+

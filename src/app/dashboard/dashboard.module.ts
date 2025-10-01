@@ -19,6 +19,8 @@ import { UpdatePasswordComponent } from './pages/Usuarios/update-password/update
 import { PersonalProfileComponent } from './pages/Usuarios/personal-profile/personal-profile.component';
 import { PersonalConfigurationComponent } from './pages/Usuarios/personal-configuration/personal-configuration.component';
 import { AreasComunesComponent } from './pages/areas-comunes/areas-comunes/areas-comunes.component';
+import { CreateAreaComunComponent } from './pages/areas-comunes/create-area-comun/create-area-comun.component';
+import { UpdateAreaComunComponent } from './pages/areas-comunes/update-area-comun/update-area-comun.component';
 
 
 
@@ -37,6 +39,8 @@ import { AreasComunesComponent } from './pages/areas-comunes/areas-comunes/areas
     PersonalProfileComponent,
     PersonalConfigurationComponent,
     AreasComunesComponent,
+    CreateAreaComunComponent,
+    UpdateAreaComunComponent,
   ],
   imports: [
     CommonModule,

@@ -20,7 +20,7 @@ export class UpdatePasswordComponent {
   
     private fb = inject( FormBuilder );
     public tipoUsuario: RoleType | undefined;
-    constructor( ) { console.log("Constructor Update Password", this.usuario); }
+    constructor( ) {}
   
 
     // 👀 Cuando cambie el input usuario
@@ -75,10 +75,8 @@ export class UpdatePasswordComponent {
 
   
   onUpdate(): void {
-     console.log("Actualizar Contraseña 1");
     if (this.myForm.invalid) return;
     if (!this.usuario) return;
-    console.log("USUARIO A ACTUALIZAR Constraseña", this.usuario);
      this.myForm.reset();
      this.close.emit();
 
