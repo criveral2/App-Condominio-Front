@@ -21,6 +21,10 @@ import { PersonalConfigurationComponent } from './pages/Usuarios/personal-config
 import { AreasComunesComponent } from './pages/areas-comunes/areas-comunes/areas-comunes.component';
 import { CreateAreaComunComponent } from './pages/areas-comunes/create-area-comun/create-area-comun.component';
 import { UpdateAreaComunComponent } from './pages/areas-comunes/update-area-comun/update-area-comun.component';
+import { ActivoComponent } from './pages/activos/activo/activo.component';
+import { ContratoComponent } from './pages/activos/contrato/contrato.component';
+import { PagoComponent } from './pages/activos/pago/pago.component';
+import { DetalleActivoComponent } from './pages/activos/detalle-activo/detalle-activo.component';
 
 
 
@@ -41,6 +45,10 @@ import { UpdateAreaComunComponent } from './pages/areas-comunes/update-area-comu
     AreasComunesComponent,
     CreateAreaComunComponent,
     UpdateAreaComunComponent,
+    ActivoComponent,
+    ContratoComponent,
+    PagoComponent,
+    DetalleActivoComponent,
   ],
   imports: [
     CommonModule,
