@@ -4,6 +4,8 @@ import { AreaComun, AreaComunCreate, AreaComunData } from '../../../interfaces/a
 import { AreaComunService } from '../../../service/area-comun.service';
 import { TipoArea, TipoAreaData } from '../../../interfaces/area-comun/tipo-area.interface';
 import Swal from 'sweetalert2';
+import { SeccionService } from '../../../service/seccion.service';
+import { Seccion } from '../../../interfaces/seccion/seccion.interface';
 
 @Component({
   selector: 'app-update-area-comun',
@@ -22,8 +24,9 @@ export class UpdateAreaComunComponent {
   
   private fb               = inject( FormBuilder );
   private areaComunService = inject( AreaComunService );
+  private seccionService = inject( SeccionService );
   public tipoArea : TipoArea | undefined;
-  public seccion : TipoArea | undefined;
+  public seccion : Seccion | undefined;
 
   public myForm: FormGroup = this.fb.group({
         description: [ '', [Validators.required, Validators.minLength(10)], [] ],
@@ -39,12 +42,19 @@ export class UpdateAreaComunComponent {
     this.areaComunService.getTipoArea().subscribe({
       next: (resp) => {
         this.tipoArea = resp;
-        this.seccion = resp;
       },
       error: (err) => {
         console.error('Error al cargar tipo de areas:', err);
       }
     });
+    this.seccionService.getSeccion().subscribe({
+        next: (resp) => {
+          this.seccion = resp;
+        },
+        error: (err) => {
+          console.error('Error al cargar las secciones:', err);
+        }
+      });
   }
 
     // 👀 Cuando cambie el input usuario
@@ -92,16 +102,17 @@ export class UpdateAreaComunComponent {
 
     if (this.myForm.invalid) return;
     if (!this.areacomun) return;
+    if (!this.seccion) return;
 
     // buscar el rol por id
-    const seccion = this.tipoArea?.data?.find( r => r.id == this.myForm.value.idSection);
+    const seccion = this.seccion?.data?.find( r => r.id == this.myForm.value.idSection);
     const tipoArea = this.tipoArea?.data?.find( r => r.id == this.myForm.value.idTypeArea);
   
      // Mapear FormGroup a UpdateAreaComun
     this.areacomunUpdate = {// conservar el id original
       description: this.myForm.value.description, // conservar el id original
-      idSection: seccion ? seccion.id : 0,
-      idTypeArea: tipoArea ? String(tipoArea.id) : "0",
+      idSection: seccion?.id ?? 1,
+      idTypeArea: tipoArea ? String(tipoArea.id) : "1",
     };
   
     this.areaComunService.updateAreaComun(this.areacomunUpdate, this.areacomun.id).subscribe({

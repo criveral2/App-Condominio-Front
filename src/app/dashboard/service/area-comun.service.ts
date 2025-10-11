@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { AreaComun, AreaComunCreate, AreaComunData } from '../interfaces/area-comun/area-comun.interface';
 import { map, Observable } from 'rxjs';
 import { TipoArea } from '../interfaces/area-comun/tipo-area.interface';
+import { Seccion } from '../interfaces/seccion/seccion.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class AreaComunService {
     const url : string = `${this.baseUrl}/type`;
     return this.http.get<TipoArea>(url);
   }
+
 
   eliminarAreaComun(id: number): Observable<void> {
     const url: string = `${this.baseUrl}/${id}`;

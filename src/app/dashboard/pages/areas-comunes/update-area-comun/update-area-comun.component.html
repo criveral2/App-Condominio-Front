@@ -44,7 +44,7 @@
                     <label for="seccion" class="block text-sm font-medium text-gray-600">Sección</label>
                     <select id="seccion" name="seccion" formControlName="idSection" placeholder="Seleccione una sección"
                         class="mt-1 block w-full rounded-lg border border-gray-300 p-2 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                        <option *ngFor="let tipoArea of tipoArea?.data" [value]="tipoArea.id">{{tipoArea.type}}
+                        <option *ngFor="let seccion of seccion?.data" [value]="seccion.id">{{seccion.name}}
                         </option>
                     </select>
                     <span *ngIf="isValid('idSection')"
@@ -55,7 +55,7 @@
                     <select id="tipoArea" name="tipoArea" formControlName="idTypeArea"
                         placeholder="Seleccione un tipo de área"
                         class="mt-1 block w-full rounded-lg border border-gray-300 p-2 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                        <option *ngFor="let seccion of seccion?.data" [value]="seccion.id">{{seccion.type}}
+                        <option *ngFor="let tipoArea of tipoArea?.data" [value]="tipoArea.id">{{tipoArea.type}}
                         </option>
                     </select>
                     <span *ngIf="isValid('idTypeArea')"

@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { AreaComunService } from '../../../service/area-comun.service';
 import { TipoArea } from '../../../interfaces/area-comun/tipo-area.interface';
 import { AreaComunCreate } from '../../../interfaces/area-comun/area-comun.interface';
+import { SeccionService } from '../../../service/seccion.service';
+import { Seccion } from '../../../interfaces/seccion/seccion.interface';
 
 @Component({
   selector: 'app-create-area-comun',
@@ -19,8 +21,9 @@ export class CreateAreaComunComponent {
   
     private fb               = inject( FormBuilder );
     private areaComunService = inject( AreaComunService );
+    private seccionService = inject( SeccionService );
     public tipoArea : TipoArea | undefined;
-    public seccion : TipoArea | undefined;
+    public seccion : Seccion | undefined;
 
     public myForm: FormGroup = this.fb.group({
       description: [ '', [Validators.required, Validators.minLength(10)], [] ],
@@ -36,10 +39,17 @@ export class CreateAreaComunComponent {
       this.areaComunService.getTipoArea().subscribe({
         next: (resp) => {
           this.tipoArea = resp;
-          this.seccion = resp;
         },
         error: (err) => {
           console.error('Error al cargar tipo de areas:', err);
+        }
+      });
+      this.seccionService.getSeccion().subscribe({
+        next: (resp) => {
+          this.seccion = resp;
+        },
+        error: (err) => {
+          console.error('Error al cargar las secciones:', err);
         }
       });
     

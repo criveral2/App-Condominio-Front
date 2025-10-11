@@ -25,6 +25,9 @@ import { ActivoComponent } from './pages/activos/activo/activo.component';
 import { ContratoComponent } from './pages/activos/contrato/contrato.component';
 import { PagoComponent } from './pages/activos/pago/pago.component';
 import { DetalleActivoComponent } from './pages/activos/detalle-activo/detalle-activo.component';
+import { SeccionComponent } from './pages/secciones/seccion/seccion.component';
+import { SeccionUpdateComponent } from './pages/secciones/seccion-update/seccion-update.component';
+import { SeccionCreateComponent } from './pages/secciones/seccion-create/seccion-create.component';
 
 
 
@@ -49,6 +52,9 @@ import { DetalleActivoComponent } from './pages/activos/detalle-activo/detalle-a
     ContratoComponent,
     PagoComponent,
     DetalleActivoComponent,
+    SeccionComponent,
+    SeccionUpdateComponent,
+    SeccionCreateComponent,
   ],
   imports: [
     CommonModule,
