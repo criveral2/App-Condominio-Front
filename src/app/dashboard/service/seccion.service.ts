@@ -41,6 +41,34 @@ export class SeccionService {
     );
   }
 
+  updateSeccion(seccionUpdate: SeccionData): Observable<Seccion> {
+    const url = `${this.baseUrl}/${seccionUpdate.id}`;
+    return this.http.put<Seccion>(url, seccionUpdate).pipe(
+      catchError(error => {
+        let message = 'Error inesperado.';
+
+        if (error.status === 0) {
+          message = 'No hay conexión con el servidor.';
+        } else if (error.status === 400) {
+          message = 'Error 400: solicitud incorrecta. Verifica los datos enviados.';
+        } else if (error.status === 404) {
+          message = 'Recurso no encontrado.';
+        } else if (error.status === 500) {
+          message = 'Error interno del servidor.';
+        } else if (error.error?.errorMessage) {
+          message = error.error.errorMessage;
+        }
+
+        return throwError(() => new Error(message));
+      })
+    );
+  }
+
+  eliminarSeccion(id: number): Observable<void> {
+    const url: string = `${this.baseUrl}/${id}`;
+    return this.http.delete<void>(url);
+  }
+
 
 }
 

@@ -49,7 +49,7 @@
             <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateSeccion(seccion)">
               <i class="material-icons-outlined">edit</i>
             </a>
-            <a class="text-gray-500 hover:text-red-600" >
+            <a class="text-gray-500 hover:text-red-600" (click)="eliminarSeccion(seccion.id!)">
               <i class="material-icons-round">delete_outline</i>
             </a>
           </td>
@@ -66,7 +66,7 @@
 <app-seccion-create [isOpen]="openModal" (close)="openModal = false" (seccionCreada)="cargaSeccion()">
 </app-seccion-create>
 
-<app-seccion-update [isOpenUpdateAreaComun]="openUpdateSeccion" [seccion]="seccion" [soloLectura]="soloLectura"
+<app-seccion-update [isOpenUpdateSeccion]="isOpenUpdateSeccion" [seccion]="seccion" [soloLectura]="soloLectura"
   (close)="isOpenUpdateSeccion = false" (seccionActualizado)="cargaSeccion()">
 </app-seccion-update>
 

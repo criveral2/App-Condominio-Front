@@ -11,8 +11,8 @@ import { SeccionData } from '../../../interfaces/seccion/seccion.interface';
   styleUrl: './seccion.component.css'
 })
 export class SeccionComponent {
- public page: number = 1;       // página actual
-  public pageSize: number = 7; 
+  public page: number = 1;       // página actual
+  public pageSize: number = 7;
   private seccionService = inject(SeccionService);
   public secciones: SeccionData[] = [];
   public openModal = false;
@@ -26,47 +26,47 @@ export class SeccionComponent {
   }
 
 
-  cargaSeccion(){
+  cargaSeccion() {
     this.seccionService.getSeccion().subscribe({
-        next: (resp) => {
-          this.secciones = resp.data;
-          this.secciones!.sort((a, b) => b.id! - a.id!);
-        },
-        error: (err) => {
-          console.error('Error al cargar roles:', err);
-        }
+      next: (resp) => {
+        this.secciones = resp.data;
+        this.secciones!.sort((a, b) => b.id! - a.id!);
+      },
+      error: (err) => {
+        console.error('Error al cargar roles:', err);
+      }
     });
   }
 
-  openUpdateSeccion(seccion: SeccionData, soloLectura: boolean = false ) {
-      this.seccion = seccion;
-      this.isOpenUpdateSeccion = true;
-      this.soloLectura = soloLectura;  // 👈 flag de visualización
+  openUpdateSeccion(seccion: SeccionData, soloLectura: boolean = false) {
+    this.seccion = seccion;
+    this.isOpenUpdateSeccion = true;
+    this.soloLectura = soloLectura;  // 👈 flag de visualización
   }
 
 
-//   eliminarAreaComun(id: number) {
-//   Swal.fire({
-//     title: '¿Estás seguro?',
-//     text: 'Esta acción eliminará el área común de forma permanente.',
-//     icon: 'warning',
-//     showCancelButton: true,
-//     confirmButtonText: 'Sí, eliminar',
-//     cancelButtonText: 'Cancelar'
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       this.areaComunService.eliminarAreaComun(id).subscribe({
-//         next: () => {
-//           Swal.fire('Eliminado', 'El área común ha sido eliminada correctamente.', 'success');
-//           this.cargaAreasComunes(); // notifica al padre
-//         },
-//         error: (message) => {
-//           const messages = message.error?.errorMessage || message.message || 'Error desconocido';
-//           Swal.fire('Error', messages.toString(), 'error');
-//         }
-//       });
-//     }
-//   });
-// }
+  eliminarSeccion(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará la sección de forma permanente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.seccionService.eliminarSeccion(id).subscribe({
+          next: () => {
+            Swal.fire('Eliminado', 'La sección ha sido eliminada correctamente.', 'success');
+            this.cargaSeccion(); // notifica al padre
+          },
+          error: (message) => {
+            const messages = message.error?.errorMessage || message.message || 'Error desconocido';
+            Swal.fire('Error', messages.toString(), 'error');
+          }
+        });
+      }
+    });
+  }
 
 }
