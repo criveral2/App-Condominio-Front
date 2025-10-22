@@ -28,7 +28,7 @@
 
   <div class="m-4">
     <ul class="mb-4 flex flex-col gap-1">
-      <li>
+      <li *ngIf="visible()">
         <a routerLink="/dashboard/general">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
@@ -65,7 +65,7 @@
           </button>
         </a>
       </li>
-      <li>
+      <li *ngIf="visible()">
         <a routerLink="/dashboard/secciones">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
@@ -82,7 +82,7 @@
           </button>
         </a>
       </li>
-      <li>
+      <li *ngIf="visible()">
         <a routerLink="/dashboard/areacomun">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
@@ -99,7 +99,7 @@
           </button>
         </a>
       </li>
-      <li>
+      <li *ngIf="visible()">
         <a routerLink="/dashboard/activos">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
@@ -117,12 +117,12 @@
       </li>
     </ul>
     <ul class="mb-4 flex flex-col gap-1">
-      <li class="mx-3.5 mt-4 mb-2">
+      <li class="mx-3.5 mt-4 mb-2" *ngIf="visible()">
         <p class="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">
           Residentes</p>
       </li>
 
-      <li>
+      <li *ngIf="visible()">
         <a routerLink="/dashboard/residentes">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"

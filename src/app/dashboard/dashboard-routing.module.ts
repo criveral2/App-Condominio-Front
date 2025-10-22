@@ -7,6 +7,7 @@ import { PersonalProfileComponent } from './pages/Usuarios/personal-profile/pers
 import { AreasComunesComponent } from './pages/areas-comunes/areas-comunes/areas-comunes.component';
 import { ActivoComponent } from './pages/activos/activo/activo.component';
 import { SeccionComponent } from './pages/secciones/seccion/seccion.component';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
 
@@ -15,12 +16,12 @@ const routes: Routes = [
     path: '',
     component: DashboardLayoutComponent,
     children: [
-      { path: 'general', component: DashboardComponent, data: { title: 'General' }},
-      { path: 'residentes', component: ProfileComponent, data: { title: 'Residentes' }},
+      { path: 'general', component: DashboardComponent, data: { title: 'General' }, canActivate: [ RoleGuard ] },
+      { path: 'residentes', component: ProfileComponent, data: { title: 'Residentes' }, canActivate: [ RoleGuard ] },
       { path: 'perfil', component: PersonalProfileComponent, data: { title: 'perfil' }},
-      { path: 'areacomun', component: AreasComunesComponent, data: { title: 'Areas Comunes' }},
-      { path: 'activos', component: ActivoComponent, data: { title: 'Activos' }},
-      { path: 'secciones', component: SeccionComponent, data: { title: 'Secciones' }},
+      { path: 'areacomun', component: AreasComunesComponent, data: { title: 'Areas Comunes' }, canActivate: [ RoleGuard ] },
+      { path: 'activos', component: ActivoComponent, data: { title: 'Activos' }, canActivate: [ RoleGuard ] },
+      { path: 'secciones', component: SeccionComponent, data: { title: 'Secciones' }, canActivate: [ RoleGuard ] },
       { path: '**', redirectTo: 'general'}
     ]
   }

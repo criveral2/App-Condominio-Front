@@ -79,4 +79,9 @@ export class AuthService {
   }
 
 
+  validaRol():boolean{
+    return this.currentUser()?.typeUser === 'Admin' ? true : false;
+  }
+
+
 }
