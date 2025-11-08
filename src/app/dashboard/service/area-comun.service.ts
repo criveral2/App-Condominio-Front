@@ -3,7 +3,6 @@ import { inject, Injectable } from '@angular/core';
 import { AreaComun, AreaComunCreate, AreaComunData } from '../interfaces/area-comun/area-comun.interface';
 import { map, Observable } from 'rxjs';
 import { TipoArea } from '../interfaces/area-comun/tipo-area.interface';
-import { Seccion } from '../interfaces/seccion/seccion.interface';
 
 @Injectable({
   providedIn: 'root'

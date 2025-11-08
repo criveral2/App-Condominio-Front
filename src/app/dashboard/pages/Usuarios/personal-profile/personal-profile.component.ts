@@ -8,11 +8,16 @@ import { User } from '../../../../auth/interfaces';
   styleUrl: './personal-profile.component.css'
 })
 export class PersonalProfileComponent {
-    private authService = inject( AuthService );
- 
-    get usuario(): User | null {
-      return this.authService.currentUser(); // se obtiene dinámicamente del signal
-    }
-  
+  private authService = inject(AuthService);
+   public isOpenPago = false;
+
+  get usuario(): User | null {
+    return this.authService.currentUser(); // se obtiene dinámicamente del signal
+  }
+
+  openPago() {
+    this.isOpenPago = true;
+  }
+
 
 }

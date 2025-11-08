@@ -28,6 +28,10 @@ import { DetalleActivoComponent } from './pages/activos/detalle-activo/detalle-a
 import { SeccionComponent } from './pages/secciones/seccion/seccion.component';
 import { SeccionUpdateComponent } from './pages/secciones/seccion-update/seccion-update.component';
 import { SeccionCreateComponent } from './pages/secciones/seccion-create/seccion-create.component';
+import { ConceptoComponent } from './pages/concepto/concepto/concepto.component';
+import { CreateConceptoComponent } from './pages/concepto/create-concepto/create-concepto.component';
+import { UpdateConceptoComponent } from './pages/concepto/update-concepto/update-concepto.component';
+import { ConceptoPipe } from './pipes/concepto.pipe';
 
 
 
@@ -55,6 +59,11 @@ import { SeccionCreateComponent } from './pages/secciones/seccion-create/seccion
     SeccionComponent,
     SeccionUpdateComponent,
     SeccionCreateComponent,
+    ConceptoComponent,
+    CreateConceptoComponent,
+    UpdateConceptoComponent,
+    //pipes
+    ConceptoPipe
   ],
   imports: [
     CommonModule,

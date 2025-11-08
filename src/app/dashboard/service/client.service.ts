@@ -49,5 +49,10 @@ export class ClientService {
     );
   }
 
+   eliminarUser(id: number): Observable<void> {
+    const url: string = `${this.baseUrl}/delete/${id}`;
+    return this.http.delete<void>(url);
+  }
+
 
 }

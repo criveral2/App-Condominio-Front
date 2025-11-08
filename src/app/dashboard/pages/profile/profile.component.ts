@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ClientService } from '../../service/client.service';
 import { User } from '../../../auth/interfaces';
 import { AuthService } from '../../../auth/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -59,4 +60,31 @@ export class ProfileComponent {
     this.usuario = usuario;
     this.isOpenUpdatePasswordProfile = true;
   }
+
+  eliminarProfile(id: number) {
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción eliminará el área común de forma permanente.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.clientService.eliminarUser(id).subscribe({
+            next: () => {
+              Swal.fire('Eliminado', 'El área común ha sido eliminada correctamente.', 'success');
+              this.cargaResidentes(); // notifica al padre
+            },
+            error: (message) => {
+              const messages = message.error?.errorMessage || message.message || 'Error desconocido';
+              Swal.fire('Error', messages.toString(), 'error');
+            }
+          });
+        }
+      });
+    }
+
+
+
 }

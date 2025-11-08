@@ -8,24 +8,29 @@ import { Pago } from '../interfaces/Pago/pago.interface';
 })
 export class PagoService {
 
-  private baseUrl : string = 'http://localhost:8080/api/v1/payment';
+  private baseUrl: string = 'http://localhost:8080/api/v1/payment';
   private http = inject(HttpClient);
 
   constructor() { }
 
+  getPagos(): Observable<Pago> {
+    const url: string = `${this.baseUrl}/all`;
+    return this.http.get<Pago>(url);
+  }
+
   createPago(pagoData: any): Observable<Pago> {
-      const url = `${this.baseUrl}`;
-      return this.http.post<Pago>(url, pagoData).pipe(
-        map(resp => {
-          if (resp.responseCode !== 'PAYM-0001') {
-            // Si hay error, lanza excepción
-            throw new Error(resp.errorMessage || 'Error desconocido');
-          }
-          // Si todo va bien, retorna el pago
-          return resp as Pago;
-        }),
-      );
-    }
+    const url = `${this.baseUrl}`;
+    return this.http.post<Pago>(url, pagoData).pipe(
+      map(resp => {
+        if (resp.responseCode !== 'PAYM-0001') {
+          // Si hay error, lanza excepción
+          throw new Error(resp.errorMessage || 'Error desconocido');
+        }
+        // Si todo va bien, retorna el pago
+        return resp as Pago;
+      }),
+    );
+  }
 
 
 

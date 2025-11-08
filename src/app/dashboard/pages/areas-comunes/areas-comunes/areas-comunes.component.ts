@@ -45,28 +45,28 @@ export class AreasComunesComponent {
 
 
   eliminarAreaComun(id: number) {
-  Swal.fire({
-    title: '¿Estás seguro?',
-    text: 'Esta acción eliminará el área común de forma permanente.',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sí, eliminar',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.areaComunService.eliminarAreaComun(id).subscribe({
-        next: () => {
-          Swal.fire('Eliminado', 'El área común ha sido eliminada correctamente.', 'success');
-          this.cargaAreasComunes(); // notifica al padre
-        },
-        error: (message) => {
-          const messages = message.error?.errorMessage || message.message || 'Error desconocido';
-          Swal.fire('Error', messages.toString(), 'error');
-        }
-      });
-    }
-  });
-}
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el área común de forma permanente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.areaComunService.eliminarAreaComun(id).subscribe({
+          next: () => {
+            Swal.fire('Eliminado', 'El área común ha sido eliminada correctamente.', 'success');
+            this.cargaAreasComunes(); // notifica al padre
+          },
+          error: (message) => {
+            const messages = message.error?.errorMessage || message.message || 'Error desconocido';
+            Swal.fire('Error', messages.toString(), 'error');
+          }
+        });
+      }
+    });
+  }
 
   
   

@@ -1,75 +1,83 @@
 <div class="flex justify-center items-start bg-gray-40 ">
-  <div class="bg-white shadow-xl rounded-2xl max-w-3xl w-full p-8 min-h-[80vh]">
+  <div class="bg-white shadow-xl rounded-2xl max-w-3xl w-full p-8 min-h-[80vh] flex flex-col justify-between">
     <!-- Header de la Card -->
-    <div class="flex flex-col items-center mb-6">
-      <h2 class="text-2xl font-bold text-gray-800">Perfil Personal</h2>
-      <p class="text-gray-500 text-sm mt-1">Información detallada del usuario</p>
-    </div>
+    <div>
+      <div class="flex flex-col items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Perfil Personal</h2>
+        <p class="text-gray-500 text-sm mt-1">Información detallada del usuario</p>
+      </div>
 
-    <hr class="border-gray-300 mb-6">
+      <hr class="border-gray-300 mb-6">
 
-    <!-- Información del usuario -->
-    <div class="space-y-5">
-      <!-- Código y Usuario -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-600">Código del usuario</label>
-          <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
-            {{usuario?.idUser}}
+      <!-- Información del usuario -->
+      <div class="space-y-5">
+        <!-- Código y Usuario -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-600">Código del usuario</label>
+            <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
+              {{usuario?.idUser}}
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-600">Usuario</label>
+            <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
+              {{usuario?.usename}}
+            </div>
           </div>
         </div>
 
+        <!-- Nombre -->
         <div>
-          <label class="block text-sm font-medium text-gray-600">Usuario</label>
+          <label class="block text-sm font-medium text-gray-600">Nombre Completo</label>
           <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
-            {{usuario?.usename}}
-          </div>
-        </div>
-      </div>
-
-      <!-- Nombre -->
-      <div>
-        <label class="block text-sm font-medium text-gray-600">Nombre Completo</label>
-        <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
-          {{usuario?.name}}
-        </div>
-      </div>
-
-      <!-- Correo -->
-      <div>
-        <label class="block text-sm font-medium text-gray-600">Correo</label>
-        <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
-          {{usuario?.email}}
-        </div>
-      </div>
-
-      <!-- CI y Teléfono -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-600">CI</label>
-          <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
-            {{usuario?.ci}}
+            {{usuario?.name}}
           </div>
         </div>
 
+        <!-- Correo -->
         <div>
-          <label class="block text-sm font-medium text-gray-600">Teléfono</label>
+          <label class="block text-sm font-medium text-gray-600">Correo</label>
           <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
-            {{usuario?.phone}}
+            {{usuario?.email}}
           </div>
         </div>
-      </div>
 
-      <!-- Tipo de usuario -->
-      <div>
-        <label class="block text-sm font-medium text-gray-600">Tipo de usuario</label>
-        <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
-          {{usuario?.typeUser}}
+        <!-- CI y Teléfono -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-600">CI</label>
+            <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
+              {{usuario?.ci}}
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-600">Teléfono</label>
+            <div class="mt-1 rounded-lg border border-gray-300 bg-gray-50 p-2 font-medium text-gray-800">
+              {{usuario?.phone}}
+            </div>
+          </div>
         </div>
+
+
       </div>
     </div>
 
-    
-
+    <!-- Botones inferiores -->
+    <div class="flex justify-center gap-4 mt-8">
+      <button (click)="openPago()"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition">
+        Registrar Pago
+      </button>
+      <button
+        class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition">
+        Ver Servicios
+      </button>
+    </div>
   </div>
 </div>
+
+<app-pago [isOpenPago]="isOpenPago" (close)="isOpenPago = false" [usuario]="usuario">
+</app-pago>

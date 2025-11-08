@@ -109,9 +109,28 @@
               class="w-7 h-7 text-green-500">
               <text x="4" y="18" font-size="18" font-weight="bold">$</text>
             </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Pagos y
-              Contratos
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              Pagos y Contratos
             </p>
+          </button>
+        </a>
+      </li>
+      <li *ngIf="visible()">
+        <a routerLink="/dashboard/concepto">
+          <button
+            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              class="w-5 h-5 text-inherit">
+              <path fill-rule="evenodd"
+                d="M12 2a7.5 7.5 0 00-4.5 13.5V18a1.5 1.5 0 001.5 1.5h6A1.5 1.5 0 0016.5 18v-2.5A7.5 7.5 0 0012 2zM9.75 19.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z"
+                clip-rule="evenodd" />
+            </svg>
+
+
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              Concepto</p>
           </button>
         </a>
       </li>

@@ -6,6 +6,8 @@ import { AuthService } from '../../../../auth/services/auth.service';
 import { Pago, PagoData } from '../../../interfaces/Pago/pago.interface';
 import { PagoService } from '../../../service/pago.service';
 import Swal from 'sweetalert2';
+import { ConceptoService } from '../../../service/concepto.service';
+import { Concepto } from '../../../interfaces/concepto/concepto.interface';
 
 @Component({
   selector: 'app-pago',
@@ -14,17 +16,33 @@ import Swal from 'sweetalert2';
 })
 export class PagoComponent {
   @Input() isOpenPago = false;
-  @Input() usuario: User | undefined;
+  @Input() usuario: User | null | undefined;
   @Output() close = new EventEmitter<void>();
 
   public today: string = new Date().toISOString().split('T')[0];
   private authService = inject(AuthService);
   private pagoService = inject(PagoService);
+  private conceptoService = inject(ConceptoService);
   private fb = inject(FormBuilder);
+  public conceptos: Concepto | undefined;
+
   constructor() { }
 
+  ngOnInit(): void {
+    this.conceptoService.getConcepto().subscribe({
+      next: (resp) => {
+        this.conceptos = resp;
+      },
+      error: (err) => {
+        console.error('Error al cargar tipo de areas:', err);
+      }
+    });
+
+
+  }
+
   public myForm: FormGroup = this.fb.group({
-    concept: ['', [Validators.required]],
+    idConcept: [1, [Validators.required]],
     detail: ['', [Validators.required, Validators.minLength(8)]],
     amount: ['1.00', [Validators.required, Validators.min(1)]],
     date: ['', [Validators.required, minDateValidator(new Date())]],
