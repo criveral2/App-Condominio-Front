@@ -21,75 +21,83 @@
 
     <!-- Card 2 -->
  <!-- Card con filtros centrados debajo -->
-<div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-md p-4 max-w-sm mx-auto">
-  
-  <!-- Icono grande arriba -->
-  <div class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-lg shadow-orange-500/40">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-      <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z"></path>
-    </svg>
-  </div>
+<form [formGroup]="filtroForm" (ngSubmit)="cargarPagosPorMesAnio()">
+  <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-md p-4 max-w-sm mx-auto">
 
-  <!-- Total financiero -->
-  <div class="mt-4 text-right">
-    <p class="text-sm text-slate-600 font-normal">Total del mes</p>
-    <h4 class="text-2xl font-semibold text-slate-900">$103,430</h4>
-  </div>
+    <!-- Icono grande arriba -->
+    <div
+      class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-lg shadow-orange-500/40">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+        fill="currentColor" class="w-6 h-6">
+        <path
+          d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
+        </path>
+      </svg>
+    </div>
 
-  <!-- Desplegables centrados debajo -->
-  <div class="mt-4 flex justify-center gap-3">
-    <!-- Selección mes -->
-    <select class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400">
-      <option>Enero</option>
-      <option>Febrero</option>
-      <option>Marzo</option>
-      <option>Abril</option>
-      <option>Mayo</option>
-      <option>Junio</option>
-      <option>Julio</option>
-      <option>Agosto</option>
-      <option>Septiembre</option>
-      <option>Octubre</option>
-      <option>Noviembre</option>
-      <option>Diciembre</option>
-    </select>
+    <!-- Total financiero -->
+    <div class="mt-4 text-right">
+      <p class="text-sm text-slate-600 font-normal">Total del mes</p>
+      <h4 class="text-2xl font-semibold text-slate-900">
+        {{ totalPagosMes | currency:'USD' }}
+      </h4>
+    </div>
 
-    <!-- Selección año -->
-    <select class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400">
-      <option>2023</option>
-      <option>2024</option>
-      <option>2025</option>
-    </select>
+    <!-- Selects centrados debajo -->
+    <div class="mt-4 flex justify-center gap-3">
+      <!-- Mes -->
+      <select
+        formControlName="month"
+        class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400">
+        <option *ngFor="let mes of meses; let i = index" [value]="i + 1">
+          {{ mes }}
+        </option>
+      </select>
+
+      <!-- Año -->
+      <select
+        formControlName="year"
+        class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400">
+        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+      </select>
+    </div>
   </div>
-</div>
+</form>
+
 
 
     <!-- Card 3 -->
    <!-- Card Total Anual con selector de año alineado a la izquierda -->
+<!-- Card Total Anual con selector de año alineado a la izquierda -->
 <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-md p-4 w-full h-full">
-  
+
   <!-- Icono grande arriba -->
-  <div class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-lg shadow-orange-500/40">
+  <div
+    class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-lg shadow-orange-500/40">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-      <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z"></path>
+      <path
+        d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
+      </path>
     </svg>
   </div>
 
   <!-- Total anual -->
   <div class="mt-4 text-right">
     <p class="text-sm text-slate-600 font-normal">Total anual</p>
-    <h4 class="text-2xl font-semibold text-slate-900">$103,430</h4>
+    <h4 class="text-2xl font-semibold text-slate-900">
+      ${{ totalPagosAnual | number:'1.2-2' }}
+    </h4>
   </div>
 
   <!-- Selector de año alineado a la izquierda -->
   <div class="mt-4 flex justify-end">
-    <select class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400">
-      <option>2023</option>
-      <option>2024</option>
-      <option>2025</option>
+    <select class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400"
+            formControlName="yearAnual">
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
     </select>
   </div>
 </div>
+
 
 
     <!-- Card 4 -->

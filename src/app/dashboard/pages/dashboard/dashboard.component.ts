@@ -6,6 +6,8 @@ import { ConceptoService } from '../../service/concepto.service';
 import { Concepto, ConceptoData } from '../../interfaces/concepto/concepto.interface';
 import { ClientService } from '../../service/client.service';
 import { User } from '../../../auth/interfaces';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { PagoAnio } from '../../interfaces/Pago/pagoAnio.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,18 +23,53 @@ export class DashboardComponent {
   public usuarios: User[] = [];
   private pagoService = inject(PagoService);
   private clientService = inject(ClientService);
-  // Mes y año seleccionados
-  public selectedMonth: number;
-  public selectedYear: number;
+  public filtroForm!: FormGroup; // 
+  public totalPagosMes: number = 0; // 🆕 total dinámico del mes
+  public years: number[] = [];
+  private fb = inject(FormBuilder); // 🆕
+public totalPagosAnual: number = 0;
 
-  constructor() {
-    const now = new Date();
-    this.selectedMonth = now.getMonth() + 1; // Mes actual (0 = enero)
-    this.selectedYear = now.getFullYear();   // Año actual
-  }
+  constructor() { }
   ngOnInit() {
+    const now = new Date();
+    const actual = now.getFullYear();
+    const start = 2010;
+    const end = actual + 3;
+    this.years = Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    // 🆕 Inicializamos el formulario con el mes y año actuales
+    this.filtroForm = this.fb.group({
+      month: [now.getMonth() + 1],
+      year: [now.getFullYear()],
+      yearAnual: [now.getFullYear()]
+    });
+
+    // 🆕 Escucha los cambios del formulario
+    this.filtroForm.valueChanges.subscribe(() => this.cargarPagosPorMesAnio());
+    this.filtroForm.get('yearAnual')?.valueChanges.subscribe(() => this.cargarPagosPorAnio());
+
     this.cargaPagos();
     this.cargaResidentes();
+    this.cargarPagosPorMesAnio();
+    this.cargarPagosPorAnio();
+
+  }
+
+
+  // 🆕 arrays para selects
+  public meses: string[] = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ];
+  // 🆕 método nuevo que reemplaza cargaPagos()
+  cargarPagosPorMesAnio() {
+    const { month, year } = this.filtroForm.value;
+    this.pagoService.getPagosPorMes(year, month).subscribe({
+      next: (resp) => {
+        
+        this.totalPagosMes = resp.data.reduce((t, p) => t + parseFloat(p.amount || '0'), 0);
+      },
+      error: (err) => console.error('Error al cargar pagos:', err)
+    });
   }
 
   cargaPagos() {
@@ -68,6 +105,18 @@ export class DashboardComponent {
   get totalResidentes(): number {
     return this.usuarios.length;
   }
+
+cargarPagosPorAnio() {
+  const year = this.filtroForm.get('yearAnual')?.value;
+
+  this.pagoService.getPagosPorAnio(year).subscribe({
+    next: (pagoAnio: PagoAnio) => {
+      this.totalPagosAnual = pagoAnio.amount;
+    },
+    error: (err) => console.error('Error al cargar pagos anuales:', err)
+  });
+}
+
 
   // ngAfterViewInit(): void {
   //   // Gráfico de barras
