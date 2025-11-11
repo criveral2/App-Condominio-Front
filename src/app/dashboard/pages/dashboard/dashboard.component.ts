@@ -4,6 +4,8 @@ import { Pago, PagoData } from '../../interfaces/Pago/pago.interface';
 import { PagoService } from '../../service/pago.service';
 import { ConceptoService } from '../../service/concepto.service';
 import { Concepto, ConceptoData } from '../../interfaces/concepto/concepto.interface';
+import { ClientService } from '../../service/client.service';
+import { User } from '../../../auth/interfaces';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,10 +18,21 @@ export class DashboardComponent {
   public pageSize: number = 5;
   public pago: Pago | undefined;
   public pagos: PagoData[] = [];
+  public usuarios: User[] = [];
   private pagoService = inject(PagoService);
+  private clientService = inject(ClientService);
+  // Mes y año seleccionados
+  public selectedMonth: number;
+  public selectedYear: number;
 
   constructor() {
+    const now = new Date();
+    this.selectedMonth = now.getMonth() + 1; // Mes actual (0 = enero)
+    this.selectedYear = now.getFullYear();   // Año actual
+  }
+  ngOnInit() {
     this.cargaPagos();
+    this.cargaResidentes();
   }
 
   cargaPagos() {
@@ -32,6 +45,28 @@ export class DashboardComponent {
         console.error('Error al cargar roles:', err);
       }
     });
+  }
+
+  get totalPagos(): number {
+    return this.pagos.reduce((total, pago) => {
+      const valor = parseFloat(pago.amount) || 0;
+      return total + valor;
+    }, 0);
+  }
+
+  cargaResidentes() {
+    this.clientService.getUsers().subscribe({
+      next: (resp) => {
+        this.usuarios = resp.data;
+      },
+      error: (err) => {
+        console.error('Error al cargar roles:', err);
+      }
+    });
+  }
+
+  get totalResidentes(): number {
+    return this.usuarios.length;
   }
 
   // ngAfterViewInit(): void {

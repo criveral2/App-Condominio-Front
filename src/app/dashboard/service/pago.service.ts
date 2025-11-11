@@ -32,6 +32,19 @@ export class PagoService {
     );
   }
 
+  getPagosPorMes(year: number, month: number): Observable<Pago[]> {
+    const url = `${this.baseUrl}/month/${year}/${month}`;
+    return this.http.get<any>(url).pipe(
+      map(resp => {
+        if (resp.responseCode !== 'PAYMENT-0001') {
+          throw new Error(resp.errorMessage || 'Error al obtener pagos');
+        }
+        return resp.data as Pago[];
+      })
+    );
+  }
+
+
 
 
 }

@@ -15,7 +15,7 @@
       </div>
       <div class="mt-4 text-right">
         <p class="text-sm text-slate-600 font-normal">Total</p>
-        <h4 class="text-2xl font-semibold text-slate-900">$53k</h4>
+        <h4 class="text-2xl font-semibold text-slate-900">{{ totalPagos | currency:'USD':'symbol':'1.0-2' }}</h4>
       </div>
     </div>
 
@@ -101,7 +101,7 @@
       </div>
       <div class="mt-4 text-right">
         <p class="text-sm text-slate-600 font-normal">Residentes</p>
-        <h4 class="text-2xl font-semibold text-slate-900">3,462</h4>
+        <h4 class="text-2xl font-semibold text-slate-900">{{ totalResidentes | number }}</h4>
       </div>
     </div>
 
