@@ -8,6 +8,7 @@ import { SeccionService } from '../../../service/seccion.service';
 import { Seccion, SeccionData } from '../../../interfaces/seccion/seccion.interface';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { User } from '../../../../auth/interfaces';
+import { ClientService } from '../../../service/client.service';
 
 @Component({
   selector: 'app-seccion-create',
@@ -23,17 +24,17 @@ export class SeccionCreateComponent {
   private fb = inject(FormBuilder);
   private seccionService = inject(SeccionService);
   public seccion: Seccion | undefined;
-  private authService = inject(AuthService);
+   private clientService = inject(ClientService);
+    public usuarios: User[] = [];
 
   public myForm: FormGroup = this.fb.group({
     location: ['', [Validators.required, Validators.minLength(10)], []],
     name: ['', [Validators.required], []],
+    idUser: ['', [Validators.required], []],
   });
 
-  constructor() { }
-
-  get usuario(): User | null {
-    return this.authService.currentUser(); // se obtiene dinámicamente del signal
+  constructor() { 
+    this.cargaResidentes();
   }
 
   isValid(field: string): boolean | null {
@@ -57,14 +58,11 @@ export class SeccionCreateComponent {
 
 
   onSave(): void {
-    if (!this.usuario) return;
-
     if (this.myForm.invalid) return;
     const seccionCreate: SeccionData = {
-      ...this.myForm.value,
-      idUser: this.usuario.idUser
+      ...this.myForm.value
     };
-    
+
     this.seccionService.createSeccion(seccionCreate).subscribe({
       next: () => {
         this.seccionCreada.emit(); // notifica al padre
@@ -74,6 +72,18 @@ export class SeccionCreateComponent {
       error: (message) => {
         const messages = message.error?.errorMessage || message.message || 'Error desconocido';
         Swal.fire('Error', messages.toString(), 'error');
+      }
+    });
+  }
+
+  cargaResidentes() {
+    this.clientService.getUsers().subscribe({
+      next: (resp) => {
+        this.usuarios = resp.data;
+        this.usuarios.sort((a, b) => b.idUser - a.idUser);
+      },
+      error: (err) => {
+        console.error('Error al cargar roles:', err);
       }
     });
   }

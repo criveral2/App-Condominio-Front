@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { User } from '../../auth/interfaces';
+import { ApiResponse, User } from '../../auth/interfaces';
 import { map, Observable, of, tap } from 'rxjs';
 import { ApiResponseUser } from '../interfaces/usuario/create-response.interface';
 import { UpdateUser, UpdateUserData } from '../interfaces/usuario/update-user.interface';
+import { ActualizaContrasenia, RespuestaActualizaContrasenia } from '../interfaces/usuario/actualiza-contrasenia.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
 
-  private baseUrl : string = 'http://localhost:8080/api/v1/user';
+  private baseUrl: string = 'http://localhost:8080/api/v1/user';
 
   constructor(private http: HttpClient) { }
 
 
-    getUsers():Observable<User>{
-      const url : string = `${this.baseUrl}/all`;
-      return this.http.get<User>(url);
-    }
+  getUsers(): Observable<User> {
+    const url: string = `${this.baseUrl}/all`;
+    return this.http.get<User>(url);
+  }
 
   createUser(user: User): Observable<User> {
     const url = `${this.baseUrl}/signup`;
@@ -49,9 +50,28 @@ export class ClientService {
     );
   }
 
-   eliminarUser(id: number): Observable<void> {
+  eliminarUser(id: number): Observable<void> {
     const url: string = `${this.baseUrl}/delete/${id}`;
     return this.http.delete<void>(url);
+  }
+
+  getUserById(id: number): Observable<ApiResponse<User>> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get<ApiResponse<User>>(url);
+  }
+
+    actualizaContrasenia(contrasenia: ActualizaContrasenia): Observable<RespuestaActualizaContrasenia> {
+    const url = `${this.baseUrl}/change_password`;
+    return this.http.post<RespuestaActualizaContrasenia>(url, contrasenia).pipe(
+      map(resp => {
+        if (resp.responseCode !== 'USER-0005') {
+          // Si hay error, lanza excepción
+          throw new Error(resp.errorMessage || 'Error desconocido');
+        }
+        // Si todo va bien, retorna el usuario
+        return resp as RespuestaActualizaContrasenia;
+      }),
+    );
   }
 
 

@@ -6,6 +6,7 @@ import { ClientService } from '../../../service/client.service';
 import { UpdateUserData } from '../../../interfaces/usuario/update-user.interface';
 import { RoleType } from '../../../interfaces/usuario/tipo-usuario.interface';
 import Swal from 'sweetalert2';
+import { ActualizaContrasenia } from '../../../interfaces/usuario/actualiza-contrasenia.interface';
 
 @Component({
   selector: 'app-update-password',
@@ -19,6 +20,7 @@ export class UpdatePasswordComponent {
     @Output() usuarioActualizado = new EventEmitter<void>();
   
     private fb = inject( FormBuilder );
+    private clienteService = inject( ClientService );
     public tipoUsuario: RoleType | undefined;
     constructor( ) {}
   
@@ -77,6 +79,20 @@ export class UpdatePasswordComponent {
   onUpdate(): void {
     if (this.myForm.invalid) return;
     if (!this.usuario) return;
+    const nuevaContrasenia : ActualizaContrasenia= {
+      idUser: this.usuario.idUser,
+      newPassword: this.myForm.value.password
+    };
+    this.clienteService.actualizaContrasenia(nuevaContrasenia).subscribe({
+          next: () => {
+            Swal.fire('Éxito', 'Contrasenia actualizada correctamente', 'success');
+            this.onClose();
+          },
+          error: (message) => {
+            const messages = message.error?.errorMessage || message.message || 'Error desconocido';
+            Swal.fire('Error', messages.toString(), 'error');
+          }
+        });
      this.myForm.reset();
      this.close.emit();
 

@@ -59,16 +59,16 @@
           <span class="bg-green-400 text-white rounded-md px-2">Activo</span>
         </td>
         <td class="p-3 flex space-x-2">
-          <a class="text-gray-500 hover:text-gray-700" (click)="openPasswordProfile(usuario)">
+          <a class="text-gray-500 hover:text-gray-700" title="Cambiar Contraseña" (click)="openPasswordProfile(usuario)">
             <i class="material-icons-outlined">fingerprint</i>
           </a>
-          <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateProfile(usuario, true)">
+          <a class="text-gray-500 hover:text-gray-700" title="Ver" (click)="openUpdateProfile(usuario, true)">
             <i class="material-icons-outlined">visibility</i>
           </a>
-          <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateProfile(usuario)">
+          <a class="text-gray-500 hover:text-gray-700" title="Editar" (click)="openUpdateProfile(usuario)">
             <i class="material-icons-outlined">edit</i>
           </a>
-          <a class="text-gray-500 hover:text-red-600" (click)="eliminarProfile(usuario.idUser)">
+          <a class="text-gray-500 hover:text-red-600" title="Eliminar" (click)="eliminarProfile(usuario.idUser)">
             <i class="material-icons-round">delete_outline</i>
           </a>
         </td>

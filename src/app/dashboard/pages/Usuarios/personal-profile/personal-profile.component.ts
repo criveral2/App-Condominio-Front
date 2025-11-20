@@ -18,6 +18,10 @@ export class PersonalProfileComponent {
   openPago() {
     this.isOpenPago = true;
   }
+  
+  visible(): boolean {
+      return this.authService.validaRol();
+  }
 
 
 }

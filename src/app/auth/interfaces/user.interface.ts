@@ -26,3 +26,9 @@ export interface Privileges {
     Properties:  string;
     Contracts:   string;
 }
+
+export interface ApiResponse<T> {
+  responseCode: string;
+  data: T;
+  errorMessage: string | null;
+}

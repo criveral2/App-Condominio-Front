@@ -19,6 +19,7 @@ export class SeccionComponent {
   public isOpenUpdateSeccion = false;
   public seccion: SeccionData | undefined;
   public soloLectura: boolean = false; // 👈 flag de solo lectura
+    public isOpenCrearPropiedad = false;
 
 
   constructor() {
@@ -42,6 +43,11 @@ export class SeccionComponent {
     this.seccion = seccion;
     this.isOpenUpdateSeccion = true;
     this.soloLectura = soloLectura;  // 👈 flag de visualización
+  }
+
+  openPropiedad(seccion: SeccionData,) {
+     this.seccion = seccion;
+    this.isOpenCrearPropiedad = true;
   }
 
 

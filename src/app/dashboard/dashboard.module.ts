@@ -32,6 +32,13 @@ import { ConceptoComponent } from './pages/concepto/concepto/concepto.component'
 import { CreateConceptoComponent } from './pages/concepto/create-concepto/create-concepto.component';
 import { UpdateConceptoComponent } from './pages/concepto/update-concepto/update-concepto.component';
 import { ConceptoPipe } from './pipes/concepto.pipe';
+import { UserPipe } from './pipes/residente.pipe';
+import { ContratosComponent } from './pages/contratos/contratos/contratos.component';
+import { CreateContratosComponent } from './pages/contratos/create-contratos/create-contratos.component';
+import { UpdateContratosComponent } from './pages/contratos/update-contratos/update-contratos.component';
+import { PropiedadesComponent } from './pages/propiedades/propiedades/propiedades.component';
+import { UpdatePropiedadesComponent } from './pages/propiedades/update-propiedades/update-propiedades.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -63,7 +70,13 @@ import { ConceptoPipe } from './pipes/concepto.pipe';
     CreateConceptoComponent,
     UpdateConceptoComponent,
     //pipes
-    ConceptoPipe
+    ConceptoPipe,
+    UserPipe,
+    ContratosComponent,
+    CreateContratosComponent,
+    UpdateContratosComponent,
+    PropiedadesComponent,
+    UpdatePropiedadesComponent
   ],
   imports: [
     CommonModule,
@@ -72,6 +85,7 @@ import { ConceptoPipe } from './pipes/concepto.pipe';
     RouterLinkActive,
     ReactiveFormsModule,
     NgxPaginationModule,
+    NgSelectModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

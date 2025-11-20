@@ -26,13 +26,14 @@
   </div>
 
 
-  <div class="m-4">
-    <ul class="mb-4 flex flex-col gap-1">
+  <div class="m-1">
+    <ul class="mb-1 flex flex-col gap-0">
+
       <li *ngIf="visible()">
         <a routerLink="/dashboard/general">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 flex w-full items-center gap-4 px-4 capitalize"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 flex w-full items-center gap-4 px-4 capitalize"
             type="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="w-5 h-5 text-inherit">
@@ -52,7 +53,7 @@
         <a routerLink="/dashboard/perfil">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 flex w-full items-center gap-4 px-4 capitalize"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 flex w-full items-center gap-4 px-4 capitalize"
             type="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="w-5 h-5 text-inherit">
@@ -66,27 +67,10 @@
         </a>
       </li>
       <li *ngIf="visible()">
-        <a routerLink="/dashboard/secciones">
-          <button
-            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
-            type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
-              class="w-5 h-5 text-inherit">
-              <path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z" />
-            </svg>
-
-
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Seccion
-            </p>
-          </button>
-        </a>
-      </li>
-      <li *ngIf="visible()">
         <a routerLink="/dashboard/areacomun">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
             type="button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
               class="w-5 h-5 text-inherit">
@@ -99,27 +83,18 @@
           </button>
         </a>
       </li>
-      <li *ngIf="visible()">
-        <a routerLink="/dashboard/activos">
-          <button
-            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-2 px-4 capitalize"
-            type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-              class="w-7 h-7 text-green-500">
-              <text x="4" y="18" font-size="18" font-weight="bold">$</text>
-            </svg>
-            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-              Pagos y Contratos
-            </p>
-          </button>
-        </a>
+
+    </ul>
+    <ul class="mb-4 flex flex-col gap-1">
+      <li class="mx-3.5 " *ngIf="visible()">
+        <p class="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">
+          Pagos</p>
       </li>
       <li *ngIf="visible()">
         <a routerLink="/dashboard/concepto">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
             type="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="w-5 h-5 text-inherit">
@@ -134,9 +109,87 @@
           </button>
         </a>
       </li>
+      <li *ngIf="visible()">
+        <a routerLink="/dashboard/activos">
+          <button
+            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-2 px-4 capitalize"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="w-7 h-7 text-green-500">
+              <text x="4" y="18" font-size="18" font-weight="bold">$</text>
+            </svg>
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              Pagos
+            </p>
+          </button>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="mb-4 flex flex-col gap-1">
+      <li class="mx-3.5" *ngIf="visible()">
+        <p class="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">
+          Contratos</p>
+      </li>
+      <li *ngIf="visible()">
+        <a routerLink="/dashboard/secciones">
+          <button
+            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+              class="w-5 h-5 text-inherit">
+              <path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z" />
+            </svg>
+
+
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Seccion
+            </p>
+          </button>
+        </a>
+      </li>
+      <li *ngIf="visible()">
+        <a routerLink="/dashboard/propiedad">
+          <button
+            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M3 21v-9a2 2 0 012-2h3v11M18 21V6a2 2 0 00-2-2h-4a2 2 0 00-2 2v15m-4-6h.01M13 9h.01M13 12h.01M13 15h.01M13 18h.01" />
+            </svg>
+
+
+
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              Propiedades</p>
+          </button>
+        </a>
+      </li>
+      <li *ngIf="visible()">
+        <a routerLink="/dashboard/contrato">
+          <button
+            routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 12h6m-6 4h6M9 8h6m1.5-6h-9a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2V4a2 2 0 00-2-2z" />
+            </svg>
+
+
+
+            <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+              Contratos</p>
+          </button>
+        </a>
+      </li>
     </ul>
     <ul class="mb-4 flex flex-col gap-1">
-      <li class="mx-3.5 mt-4 mb-2" *ngIf="visible()">
+      <li class="mx-3.5" *ngIf="visible()">
         <p class="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75">
           Residentes</p>
       </li>
@@ -145,7 +198,7 @@
         <a routerLink="/dashboard/residentes">
           <button
             routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 flex w-full items-center gap-4 px-4 capitalize"
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 rounded-lg text-white hover:bg-white/10 active:bg-white/30 flex w-full items-center gap-4 px-4 capitalize"
             type="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
               class="w-5 h-5 text-inherit">

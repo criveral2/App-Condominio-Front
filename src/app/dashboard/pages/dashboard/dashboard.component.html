@@ -1,110 +1,78 @@
 <!-- Contenedor principal -->
-<div class="flex flex-col bg-gray-50 p-6 space-y-12">
+<div class="flex flex-col bg-gray-50 p-4 space-y-4">
 
   <!-- Tarjetas resumen -->
   <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
     <!-- Card 1 -->
+    <!-- Card con filtros centrados debajo -->
+
     <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-md p-4">
-      <div class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-lg shadow-blue-500/40">
+      <div
+        class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-lg shadow-blue-500/40">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
           <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"></path>
-          <path fill-rule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z" clip-rule="evenodd"></path>
-          <path d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z"></path>
+          <path fill-rule="evenodd"
+            d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z"
+            clip-rule="evenodd"></path>
+          <path
+            d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z">
+          </path>
         </svg>
       </div>
       <div class="mt-4 text-right">
-        <p class="text-sm text-slate-600 font-normal">Total</p>
-        <h4 class="text-2xl font-semibold text-slate-900">{{ totalPagos | currency:'USD':'symbol':'1.0-2' }}</h4>
+        <p class="text-sm text-slate-600 font-normal">Total Mensual</p>
+        <h4 class="text-2xl font-semibold text-slate-900"> {{ totalPagosMes | currency:'USD' }}</h4>
       </div>
     </div>
 
     <!-- Card 2 -->
- <!-- Card con filtros centrados debajo -->
-<form [formGroup]="filtroForm" (ngSubmit)="cargarPagosPorMesAnio()">
-  <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-md p-4 max-w-sm mx-auto">
-
-    <!-- Icono grande arriba -->
-    <div
-      class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-lg shadow-orange-500/40">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-        fill="currentColor" class="w-6 h-6">
-        <path
-          d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
-        </path>
-      </svg>
-    </div>
-
-    <!-- Total financiero -->
-    <div class="mt-4 text-right">
-      <p class="text-sm text-slate-600 font-normal">Total del mes</p>
-      <h4 class="text-2xl font-semibold text-slate-900">
-        {{ totalPagosMes | currency:'USD' }}
-      </h4>
-    </div>
-
-    <!-- Selects centrados debajo -->
-    <div class="mt-4 flex justify-center gap-3">
-      <!-- Mes -->
-      <select
-        formControlName="month"
-        class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400">
-        <option *ngFor="let mes of meses; let i = index" [value]="i + 1">
-          {{ mes }}
-        </option>
-      </select>
-
-      <!-- Año -->
-      <select
-        formControlName="year"
-        class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400">
-        <option *ngFor="let y of years" [value]="y">{{ y }}</option>
-      </select>
-    </div>
-  </div>
-</form>
-
-
-
-    <!-- Card 3 -->
-   <!-- Card Total Anual con selector de año alineado a la izquierda -->
-<!-- Card Total Anual con selector de año alineado a la izquierda -->
+    <!-- Card 3: Total por Concepto -->
 <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-md p-4 w-full h-full">
 
-  <!-- Icono grande arriba -->
-  <div
-    class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-lg shadow-orange-500/40">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-      <path
-        d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
-      </path>
-    </svg>
-  </div>
+  <!-- Icono superior -->
+        <div
+        class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-lg shadow-orange-500/40">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path
+            d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z">
+          </path>
+        </svg>
+      </div>
 
-  <!-- Total anual -->
+  <!-- Total por concepto -->
   <div class="mt-4 text-right">
-    <p class="text-sm text-slate-600 font-normal">Total anual</p>
+    <p class="text-sm text-slate-600 font-normal">Total por concepto</p>
     <h4 class="text-2xl font-semibold text-slate-900">
-      ${{ totalPagosAnual | number:'1.2-2' }}
+      ${{ totalPorConcepto | number:'1.2-2' }}
     </h4>
   </div>
 
-  <!-- Selector de año alineado a la izquierda -->
+  <!-- Selector de concepto -->
   <div class="mt-4 flex justify-end">
-    <select class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white focus:ring-1 focus:ring-orange-400"
-            formControlName="yearAnual">
-      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    <select
+       [formControl]="idConceptoControl"
+      class="border border-gray-300 rounded-md px-2 py-1 text-xs bg-white 
+             focus:ring-1 focus:ring-green-400 focus:outline-none transition-all duration-200">
+      <option *ngFor="let concepto of conceptos?.data" [value]="concepto.id">
+        {{ concepto.name }}
+      </option>
     </select>
   </div>
 </div>
 
 
 
-    <!-- Card 4 -->
+
+
+    <!-- Card 3 -->
     <div class="relative flex flex-col rounded-xl bg-white text-gray-700 shadow-md p-4">
-      <div class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-lg shadow-green-500/40">
+      <div
+        class="absolute -mt-8 mx-4 grid h-16 w-16 place-items-center rounded-xl bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-lg shadow-green-500/40">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-          <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"></path>
+          <path
+            d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z">
+          </path>
         </svg>
       </div>
       <div class="mt-4 text-right">
@@ -116,45 +84,59 @@
   </div>
 
   <!-- Contenedor principal -->
-<div class="flex flex-col bg-gray-50 p-1 space-y-1">
+  <div class="flex flex-col bg-gray-50 p-1 space-y-1">
 
-  <!-- Tabla financiera azulada al ancho completo -->
-  <div class="overflow-x-auto shadow-lg rounded-2xl border border-blue-200 bg-white w-full">
-    <table class="w-full text-sm text-gray-700 border-collapse">
-      <thead class="bg-blue-100  uppercase text-xs font-semibold">
-        <tr>
-          <th class="px-6 py-3 text-left">Usuario</th>
-          <th class="px-6 py-3 text-left">Detalle</th>
-          <th class="px-6 py-3 text-left">Fecha Pago</th>
-          <th class="px-6 py-3 text-left">Concepto</th>
-          <th class="px-6 py-3 text-left">Valor Pago</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let pago of pagos | paginate: { itemsPerPage: pageSize, currentPage: page }"
+    <!-- 🟦 Filtros -->
+    <form [formGroup]="filtroForm" class="flex flex-wrap items-center justify-end gap-2 mb-2 px-2">
+      <div class="flex items-center space-x-2">
+        <label for="year" class="text-sm font-medium text-gray-700">Año:</label>
+        <select id="year" formControlName="year"
+          class="border border-gray-300 rounded-md px-2 py-1 text-sm bg-white focus:ring-1 focus:ring-blue-400">
+          <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+        </select>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <label for="month" class="text-sm font-medium text-gray-700">Mes:</label>
+        <select id="month" formControlName="month"
+          class="border border-gray-300 rounded-md px-2 py-1 text-sm bg-white focus:ring-1 focus:ring-blue-400">
+          <option *ngFor="let m of meses; let i = index" [value]="i + 1">{{ m }}</option>
+        </select>
+      </div>
+    </form>
+
+    <!-- 🧾 Tabla financiera -->
+    <div class="overflow-x-auto shadow-lg rounded-2xl border border-blue-200 bg-white w-full">
+      <table class="w-full text-sm text-gray-700 border-collapse">
+        <thead class="bg-blue-100 uppercase text-xs font-semibold">
+          <tr>
+            <th class="px-6 py-3 text-left">Usuario</th>
+            <th class="px-6 py-3 text-left">Detalle</th>
+            <th class="px-6 py-3 text-left">Fecha Pago</th>
+            <th class="px-6 py-3 text-left">Concepto</th>
+            <th class="px-6 py-3 text-left">Valor Pago</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pago of pagos | paginate: { itemsPerPage: pageSize, currentPage: page }"
             class="bg-white hover:bg-blue-50 transition-all duration-200 rounded-lg">
-          <td class="px-6 py-4 font-semibold text-blue-800">{{ pago.idUserPays }}</td>
-          <td class="px-6 py-4 text-gray-600">{{ pago.detail }}</td>
-          <td class="px-6 py-4 text-gray-600">{{ pago.date }}</td>
-          <td class="px-6 py-4 text-gray-600">{{ pago.idConcept | conceptoPipe }}</td>
-          <td class="px-6 py-4 text-right">
-            <span class="inline-flex items-center px-3 py-1 text-sm font-semibold  bg-green-100 rounded-full">
-              ${{ pago.amount | number:'1.2-2' }}
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+            <td class="px-6 py-4 font-semibold text-blue-800">{{ pago.idUserPays | userPipe }}</td>
+            <td class="px-6 py-4 text-gray-600">{{ pago.detail }}</td>
+            <td class="px-6 py-4 text-gray-600">{{ pago.date }}</td>
+            <td class="px-6 py-4 text-gray-600">{{ pago.idConcept | conceptoPipe }}</td>
+            <td class="px-6 py-4 text-right">
+              <span class="inline-flex items-center px-3 py-1 text-sm font-semibold bg-green-100 rounded-full">
+                ${{ pago.amount | number:'1.2-2' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <!-- Paginación simple -->
-  <div class="mt-6 flex justify-center gap-3 text-blue-700 font-medium w-full">
-    <pagination-controls
-      previousLabel="Anterior"
-      nextLabel="Siguiente"
-      class=""
-      (pageChange)="page = $event">
-    </pagination-controls>
+    <!-- 🔹 Paginación -->
+    <div class="mt-6 flex justify-center gap-3 text-blue-700 font-medium w-full">
+      <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="page = $event">
+      </pagination-controls>
+    </div>
   </div>
-
-</div>

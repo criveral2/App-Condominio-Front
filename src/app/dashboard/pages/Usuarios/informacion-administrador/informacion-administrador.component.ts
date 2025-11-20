@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, inject } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { User } from '../../../../auth/interfaces';
+import { ClientService } from '../../../service/client.service';
 
 @Component({
   selector: 'app-informacion-administrador',
@@ -10,19 +11,25 @@ import { User } from '../../../../auth/interfaces';
 export class InformacionAdministradorComponent {
 
   public isOpen = false;
-  private authService = inject( AuthService );
-  private elRef = inject( ElementRef );
+  private authService = inject(AuthService);
+  private clientService = inject(ClientService);
+  private elRef = inject(ElementRef);
+  public usuario: User | null = null;
 
-
-  get usuario(): User | null {
-    return this.authService.currentUser(); // se obtiene dinámicamente del signal
+  ngOnInit(): void {
+    this.clientService.getUserById(1).subscribe({
+      next: (resp) => this.usuario = resp.data,
+      error: (err) => console.error('Error al cargar usuario', err)
+    });
   }
+
+
 
   togglePopover() {
     this.isOpen = !this.isOpen;
   }
 
-    // Detecta clics fuera del componente
+  // Detecta clics fuera del componente
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
     const clickedInside = this.elRef.nativeElement.contains(event.target);
@@ -30,5 +37,5 @@ export class InformacionAdministradorComponent {
       this.isOpen = false;
     }
   }
-  
+
 }

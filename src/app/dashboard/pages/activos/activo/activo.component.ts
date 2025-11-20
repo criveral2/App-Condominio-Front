@@ -17,7 +17,7 @@ export class ActivoComponent {
     public openModal = false;
     public isOpenPago = false;
     public isOpenContrato = false;
-    public isOpenVisualizar = false;
+  
     public areacomun: AreaComunData | undefined;
     public soloLectura: boolean = false; // 👈 flag de solo lectura
     public usuarios: User[] = [];
@@ -51,10 +51,7 @@ export class ActivoComponent {
       this.isOpenContrato = true;
     }
 
-     openVisualizar(usuario: User) {
-      this.usuario = usuario;
-      this.isOpenVisualizar = true;
-    }
+
   
 
 

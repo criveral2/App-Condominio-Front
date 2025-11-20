@@ -2,6 +2,11 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { User } from '../../../../auth/interfaces';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { minDateValidator } from '../../../validators/validator-date';
+import { SeccionData } from '../../../interfaces/seccion/seccion.interface';
+import { PropiedadService } from '../../../service/propiedad.service';
+import { TipoPropiedad, TipoPropiedadData } from '../../../interfaces/Propiedad/tipo-propiedad.interface';
+import { PropiedadData } from '../../../interfaces/Propiedad/propiedad.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalle-activo',
@@ -9,28 +14,40 @@ import { minDateValidator } from '../../../validators/validator-date';
   styleUrl: './detalle-activo.component.css'
 })
 export class DetalleActivoComponent {
-  @Input() isOpenVisualizar = false;
-  @Input() usuario: User | undefined;
+  @Input() isOpenCrearPropiedad = false;
+  @Input() seccion: SeccionData | undefined;
   @Output() close = new EventEmitter<void>();
 
-  private fb = inject( FormBuilder );
-  constructor( ) { }
-  
+  private fb = inject(FormBuilder);
+  private propiedadService = inject(PropiedadService);
+  public tipoPropiedades: TipoPropiedadData[] = [];
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.propiedadService.getTipoPropiedad().subscribe({
+      next: (resp) => {
+        this.tipoPropiedades = resp.data;
+      },
+      error: (err) => console.error('Error cargando tipos', err)
+    });
+  }
+
   public myForm: FormGroup = this.fb.group({
-    concept: ['', [Validators.required]],
-    detail: ['', [Validators.required, Validators.minLength(8)]],
-    amount: ['', [Validators.required, Validators.min(1)]],
-    date: ['', [Validators.required, minDateValidator(new Date())]],
+    propertyDimensions: [1, [Validators.required, Validators.min(1)]],
+    propertyDescription: ['', [Validators.required, Validators.minLength(8)]],
+    propertyValue: [1, [Validators.required, Validators.min(1)]],
+    propertyIdType: [1, [Validators.required]],
   });
 
   isValid(field: string): boolean | null {
     return this.myForm.controls[field].errors
-          && this.myForm.controls[field].touched;
+      && this.myForm.controls[field].touched;
   }
 
   getFieldError(field: string): string | null {
-    if (!this.myForm.controls[field]) return null;  
-    const errors = this.myForm.controls[field].errors || {};  
+    if (!this.myForm.controls[field]) return null;
+    const errors = this.myForm.controls[field].errors || {};
 
     for (const key of Object.keys(errors)) {
       switch (key) {
@@ -49,11 +66,26 @@ export class DetalleActivoComponent {
     return null;
   }
 
-   onUpdate(): void {
+  onSave(): void {
     if (this.myForm.invalid) return;
-    if (!this.usuario) return;
-    this.myForm.reset();
-    this.close.emit();
+    if (!this.seccion) return;
+    const propiedad: PropiedadData = {
+      ...this.myForm.value,    // ← lo que viene del formulario
+      propertyEnvironments: 1,
+      propertyImage: "no hay",
+      propertyIdSection: this.seccion.id
+    };
+
+    this.propiedadService.createPropiedad(propiedad).subscribe({
+      next: () => {
+        Swal.fire('Éxito', 'Área Comun creada correctamente', 'success');
+        this.onClose();
+      },
+      error: (message) => {
+        const messages = message.error?.errorMessage || message.message || 'Error desconocido';
+        Swal.fire('Error', messages.toString(), 'error');
+      }
+    });
   }
 
   onClose() {

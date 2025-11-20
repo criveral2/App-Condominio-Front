@@ -9,6 +9,8 @@ import { ActivoComponent } from './pages/activos/activo/activo.component';
 import { SeccionComponent } from './pages/secciones/seccion/seccion.component';
 import { RoleGuard } from './guards/role.guard';
 import { ConceptoComponent } from './pages/concepto/concepto/concepto.component';
+import { PropiedadesComponent } from './pages/propiedades/propiedades/propiedades.component';
+import { ContratosComponent } from './pages/contratos/contratos/contratos.component';
 
 const routes: Routes = [
 
@@ -24,6 +26,8 @@ const routes: Routes = [
       { path: 'activos', component: ActivoComponent, data: { title: 'Activos' }, canActivate: [ RoleGuard ] },
       { path: 'secciones', component: SeccionComponent, data: { title: 'Secciones' }, canActivate: [ RoleGuard ] },
       { path: 'concepto', component: ConceptoComponent, data: { title: 'Concepto' }, canActivate: [ RoleGuard ] },
+      { path: 'propiedad', component: PropiedadesComponent, data: { title: 'Propiedades' }, canActivate: [ RoleGuard ] },
+      { path: 'contrato', component: ContratosComponent, data: { title: 'Contrato' }, canActivate: [ RoleGuard ] },
       { path: '**', redirectTo: 'general'}
     ]
   }

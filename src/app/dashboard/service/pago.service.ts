@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Pago } from '../interfaces/Pago/pago.interface';
 import { PagoAnio } from '../interfaces/Pago/pagoAnio.interface';
+import { PagoConceptoResponse } from '../interfaces/Pago/pagoConcepto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,28 @@ getPagosPorAnio(year: number): Observable<PagoAnio> {
     })
   );
 }
+
+
+getPagosPorConcepto(concepto: number, year: number, month: number): Observable<PagoConceptoResponse> {
+  const url = `${this.baseUrl}/stats/concept/filter`;
+  const params = { 
+    conceptId: concepto.toString(), 
+    year: year.toString(), 
+    month: month.toString() 
+  };
+
+  return this.http.get<PagoConceptoResponse>(url, { params }).pipe(
+    map(resp => {
+      if (resp.responseCode !== 'PAYMENT-0005') {
+        throw new Error(resp.errorMessage || 'Error al obtener pagos por concepto');
+      }
+      return resp; // ✅ Devuelve la respuesta completa
+    })
+  );
+}
+
+
+
 
 
 

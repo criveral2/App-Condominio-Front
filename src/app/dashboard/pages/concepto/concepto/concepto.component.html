@@ -43,13 +43,13 @@
           </td>
 
           <td class="p-3 flex space-x-2">
-            <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateConcepto(concepto, true)">
+            <a class="text-gray-500 hover:text-gray-700" title="Ver" (click)="openUpdateConcepto(concepto, true)">
               <i class="material-icons-outlined">visibility</i>
             </a>
-            <a class="text-gray-500 hover:text-gray-700" (click)="openUpdateConcepto(concepto)">
+            <a class="text-gray-500 hover:text-gray-700" title="Editar" (click)="openUpdateConcepto(concepto)">
               <i class="material-icons-outlined">edit</i>
             </a>
-            <a class="text-gray-500 hover:text-red-600" (click)="eliminarConcepto(concepto.id)">
+            <a class="text-gray-500 hover:text-red-600" title="Eliminar" (click)="eliminarConcepto(concepto.id)">
               <i class="material-icons-round">delete_outline</i>
             </a>
           </td>

@@ -1,0 +1,81 @@
+<!-- component -->
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round"
+    rel="stylesheet">
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="flex flex-col bg-gray-50">
+
+    <!-- Header -->
+    <div  class="flex justify-between items-center p-2 bg-white shadow-sm">
+        <h2 class="text-xl font-bold text-gray-700">Lista de Propiedades</h2>
+    </div>
+
+    <!-- Tabla -->
+    <div class="flex-grow overflow-auto p-4">
+        <table class="table text-gray-700 border-separate space-y-6 text-sm w-full">
+            <thead class="bg-gray-200 text-gray-600">
+                <tr>
+                    <th class="p-3 text-left">Residente</th>
+                    <th class="p-3 text-left">Cantidad</th>
+                    <th class="p-3 text-left">Fecha de Inicio</th>
+                    <th class="p-3 text-left">Fecha de Fin</th>
+                    <th class="p-3 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <tr *ngFor="let contrato of contratos | paginate: { itemsPerPage: pageSize, currentPage: page }"
+                    class="bg-white shadow-md hover:bg-gray-50 transition">
+                    <td class="p-3 font-medium text-gray-800">{{ contrato.contractUser | userPipe}}</td>
+                    <td class="p-3 text-gray-500 truncate max-w-xs">{{ contrato.contractAmount }}</td>
+                    <td class="p-3 text-gray-500">{{ contrato.contractSignatureDate }}</td>
+                    <td class="p-3 text-gray-500">{{ contrato.contractEndDate }}</td>
+
+                    <!-- Acciones -->
+                    <td class="p-3 flex items-center justify-center gap-3 text-gray-600">
+                        <button class="hover:text-blue-600" title="Ver" (click)="openUpdateContrato(contrato, true)">
+                            <i class="material-icons-outlined text-[20px]">visibility</i>
+                        </button>
+                        <button class="hover:text-green-600" title="Editar" (click)="openUpdateContrato(contrato)">
+                            <i class="material-icons-outlined text-[20px]">edit</i>
+                        </button>
+                        <button class="hover:text-red-600" title="Eliminar" (click)="eliminarAreaComun(contrato.id)">
+                            <i class="material-icons-round text-[20px]">delete_outline</i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Paginación -->
+        <div class="mt-4 flex justify-center">
+            <pagination-controls previousLabel="" nextLabel=""
+                class="flex gap-2 text-blue-600 font-medium"
+                (pageChange)="page = $event">
+            </pagination-controls>
+        </div>
+    </div>
+</div>
+
+<app-update-contratos [isOpenUpdateContrato]="isOpenUpdateContrato" [contrato]="contrato" [soloLectura]="soloLectura"
+  (close)="isOpenUpdateContrato = false" (contratoActualizado)="cargaContratos()">
+</app-update-contratos>
+
+<style>
+  .table {
+    border-spacing: 0 12px;
+  }
+
+  .table tr {
+    border-radius: 10px;
+  }
+
+  tr td:nth-child(n+5),
+  tr th:nth-child(n+5) {
+    border-radius: 0 .625rem .625rem 0;
+  }
+
+  tr td:nth-child(1),
+  tr th:nth-child(1) {
+    border-radius: .625rem 0 0 .625rem;
+  }
+</style>

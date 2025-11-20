@@ -45,7 +45,7 @@ export class PagoComponent {
     idConcept: [1, [Validators.required]],
     detail: ['', [Validators.required, Validators.minLength(8)]],
     amount: ['1.00', [Validators.required, Validators.min(1)]],
-    date: ['', [Validators.required, minDateValidator(new Date())]],
+    date: ['', [Validators.required]],
   });
 
   isValid(field: string): boolean | null {
@@ -65,8 +65,6 @@ export class PagoComponent {
           return `Mínimo ${errors['minlength'].requiredLength} caracteres`;
         case 'pattern':
           return 'Formato inválido';
-        case 'min':
-          return `El valor debe ser mayor o igual a ${errors['min'].min}`;
         case 'minDate': // tu validador personalizado
           return 'La fecha debe ser mayor o igual a hoy';
       }

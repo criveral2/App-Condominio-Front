@@ -21,7 +21,7 @@ export class LoginPagesComponent {
 
   public myForm: FormGroup = this.fb.group({
     username: ['Cmacancelaaa', [Validators.required, Validators.email]], 
-    password: ['a12d232dsdS.', [Validators.required]]
+    password: ['a12d232dsdSq.', [Validators.required]]
   });
 
   login(){
