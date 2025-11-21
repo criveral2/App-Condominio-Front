@@ -16,7 +16,7 @@
             <thead class="bg-gray-200 text-gray-600">
                 <tr>
                     <th class="p-3 text-left">Residente</th>
-                    <th class="p-3 text-left">Cantidad</th>
+                    <th class="p-3 text-left">Costo de arriendo</th>
                     <th class="p-3 text-left">Fecha de Inicio</th>
                     <th class="p-3 text-left">Fecha de Fin</th>
                     <th class="p-3 text-left">Acciones</th>
@@ -26,7 +26,7 @@
                 <tr *ngFor="let contrato of contratos | paginate: { itemsPerPage: pageSize, currentPage: page }"
                     class="bg-white shadow-md hover:bg-gray-50 transition">
                     <td class="p-3 font-medium text-gray-800">{{ contrato.contractUser | userPipe}}</td>
-                    <td class="p-3 text-gray-500 truncate max-w-xs">{{ contrato.contractAmount }}</td>
+                    <td class="p-3 text-gray-500 truncate max-w-xs">{{ contrato.contractAmount | currency:'USD':'symbol'  }}</td>
                     <td class="p-3 text-gray-500">{{ contrato.contractSignatureDate }}</td>
                     <td class="p-3 text-gray-500">{{ contrato.contractEndDate }}</td>
 

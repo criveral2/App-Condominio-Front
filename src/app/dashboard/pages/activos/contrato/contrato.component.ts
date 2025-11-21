@@ -1,6 +1,8 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, SimpleChanges } from '@angular/core';
 import { User } from '../../../../auth/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContratoService } from '../../../service/contrato.service';
+import { ContratoUsuario } from '../../../interfaces/contrato/contrato-usuario.interface';
 
 
 @Component({
@@ -10,51 +12,45 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ContratoComponent {
   @Input() isOpenContrato = false;
-  @Input() usuario: User | undefined;
+  @Input() usuario: User | undefined | null;
   @Output() close = new EventEmitter<void>();
 
-  private fb = inject( FormBuilder );
-  constructor( ) { }
-  
-  public myForm: FormGroup = this.fb.group({
-      password: [ '', [ Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)]],
-      repeatPassword: ['', [Validators.required]], 
-  });
+  private fb = inject(FormBuilder);
+  private contratoService = inject(ContratoService);
+  public contratos: ContratoUsuario[] = [];
+  constructor() { }
 
-  isValid(field: string): boolean | null {
-    return this.myForm.controls[field].errors
-          && this.myForm.controls[field].touched;
-  }  
-
-  getFieldError(field: string): string | null {
-    if (!this.myForm.controls[field]) return null;  
-    const errors = this.myForm.controls[field].errors || {};  
-
-    for (const key of Object.keys(errors)) {
-      switch (key) {
-        case 'required':
-          return 'Este campo es requerido';
-        case 'minlength':
-          return `Mínimo ${errors['minlength'].requiredLength} caracteres`;
-        case 'pattern':
-          return 'Debe tener al menos 8 caracteres, una mayúscula y un caracter especial';
-        case 'passwordMismatch':
-          return 'Las contraseñas no coinciden';
-      }
+  // 👀 Cuando cambie el input usuario
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['usuario'] && this.usuario) {
+      this.cargaContratos(this.usuario.idUser);
     }
-    return null;
   }
-  
-   onUpdate(): void {
-    if (this.myForm.invalid) return;
-    if (!this.usuario) return;
-    this.myForm.reset();
-    this.close.emit();
-  }
+
+  mensajeSinContratos: string | null = null;
+
+cargaContratos(id: number) {
+  this.contratoService.getContratosUser(id).subscribe({
+    next: (resp) => {
+
+      this.contratos = resp;             // 👈 resp ya es un array de contratos completo
+      console.log("Contratos:", this.contratos);
+
+      // Mostrar mensaje si no hay
+      this.mensajeSinContratos = this.contratos.length === 0
+        ? "Este usuario no tiene contratos registrados."
+        : null;
+    },
+    error: (err) => {
+      console.error('Error al cargar contratos:', err);
+      this.contratos = [];  
+      this.mensajeSinContratos = "No se pudieron cargar los contratos.";
+    }
+  });
+}
 
   onClose() {
     this.close.emit();
-    this.myForm.reset();
   }
 
 }

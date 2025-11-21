@@ -10,6 +10,8 @@ import { User } from '../../../../auth/interfaces';
 export class PersonalProfileComponent {
   private authService = inject(AuthService);
    public isOpenPago = false;
+    public isOpenContrato = false;
+   
 
   get usuario(): User | null {
     return this.authService.currentUser(); // se obtiene dinámicamente del signal
@@ -22,6 +24,12 @@ export class PersonalProfileComponent {
   visible(): boolean {
       return this.authService.validaRol();
   }
+
+   openContrato() {
+      this.isOpenContrato = true;
+    }
+
+
 
 
 }

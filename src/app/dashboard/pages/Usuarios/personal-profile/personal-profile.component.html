@@ -68,11 +68,11 @@
     <!-- Botones inferiores -->
     <div class="flex justify-center gap-4 mt-8">
       <button (click)="openPago()"
-      *ngIf="visible()"
+      
         class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition">
         Registrar Pago
       </button>
-      <button
+      <button (click)="openContrato()"
         class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition">
         Ver Servicios
       </button>
@@ -82,3 +82,5 @@
 
 <app-pago [isOpenPago]="isOpenPago" (close)="isOpenPago = false" [usuario]="usuario">
 </app-pago>
+<app-contrato [isOpenContrato]="isOpenContrato" (close)="isOpenContrato = false" [usuario]="usuario">
+</app-contrato>

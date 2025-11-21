@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { TipoContrato } from '../interfaces/contrato/tipo-contrato.interface';
 import { Contrato, ContratoData, CreateContrato } from '../interfaces/contrato/contrato.interface';
+import { ContratoUsuario, ContratoUsuarioResponse } from '../interfaces/contrato/contrato-usuario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,16 @@ export class ContratoService {
     const url: string = `${this.baseUrl}/${id}`;
     return this.http.delete<void>(url);
   }
+
+getContratosUser(id: number): Observable<ContratoUsuario[]> {
+  console.log("ID usuario en servicio:", id);
+  console.log("URL llamada:", `${this.baseUrl}/${id}`);
+  return this.http.get<ContratoUsuarioResponse>(`${this.baseUrl}/user/${id}`).pipe(
+    map(res => res.data?.data ?? [])
+  );
+}
+
+
 
 
 }
