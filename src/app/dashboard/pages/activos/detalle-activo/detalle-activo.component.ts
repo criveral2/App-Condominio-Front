@@ -7,6 +7,7 @@ import { PropiedadService } from '../../../service/propiedad.service';
 import { TipoPropiedad, TipoPropiedadData } from '../../../interfaces/Propiedad/tipo-propiedad.interface';
 import { PropiedadData } from '../../../interfaces/Propiedad/propiedad.interface';
 import Swal from 'sweetalert2';
+import { ClientService } from '../../../service/client.service';
 
 @Component({
   selector: 'app-detalle-activo',
@@ -19,10 +20,13 @@ export class DetalleActivoComponent {
   @Output() close = new EventEmitter<void>();
 
   private fb = inject(FormBuilder);
+  private clientService = inject(ClientService);
   private propiedadService = inject(PropiedadService);
   public tipoPropiedades: TipoPropiedadData[] = [];
+  public usuarios: User[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.propiedadService.getTipoPropiedad().subscribe({
@@ -31,6 +35,7 @@ export class DetalleActivoComponent {
       },
       error: (err) => console.error('Error cargando tipos', err)
     });
+    this.cargaResidentes()
   }
 
   public myForm: FormGroup = this.fb.group({
@@ -38,6 +43,7 @@ export class DetalleActivoComponent {
     propertyDescription: ['', [Validators.required, Validators.minLength(8)]],
     propertyValue: [1, [Validators.required, Validators.min(1)]],
     propertyIdType: [1, [Validators.required]],
+    userId: [null, [Validators.required]]
   });
 
   isValid(field: string): boolean | null {
@@ -84,6 +90,18 @@ export class DetalleActivoComponent {
       error: (message) => {
         const messages = message.error?.errorMessage || message.message || 'Error desconocido';
         Swal.fire('Error', messages.toString(), 'error');
+      }
+    });
+  }
+
+  cargaResidentes() {
+    this.clientService.getUsers().subscribe({
+      next: (resp) => {
+        this.usuarios = resp.data;
+        this.usuarios.sort((a, b) => b.idUser - a.idUser);
+      },
+      error: (err) => {
+        console.error('Error al cargar roles:', err);
       }
     });
   }

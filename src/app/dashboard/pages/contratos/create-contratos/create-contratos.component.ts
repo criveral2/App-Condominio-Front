@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { ContratoService } from '../../../service/contrato.service';
 import { TipoContratoData } from '../../../interfaces/contrato/tipo-contrato.interface';
 import { CreateContrato } from '../../../interfaces/contrato/contrato.interface';
+import { ClientService } from '../../../service/client.service';
 
 @Component({
   selector: 'app-create-contratos',
@@ -20,6 +21,8 @@ export class CreateContratosComponent {
   private fb = inject(FormBuilder);
   private contratoService = inject(ContratoService);
   public tipoContratos: TipoContratoData[] = [];
+   private clientService = inject(ClientService);
+   public usuarios: User[] = [];
 
   constructor() { }
 
@@ -31,6 +34,7 @@ export class CreateContratosComponent {
       },
       error: (err) => console.error('Error cargando tipos', err)
     });
+    this.cargaResidentes();
   }
   ngOnChanges(): void {
     if (this.propiedad) {
@@ -45,6 +49,7 @@ export class CreateContratosComponent {
     endDate: [1, [Validators.required]],
     amount: [1, [Validators.required, Validators.min(1)]],
     idType: [1, [Validators.required]],
+    idUser: [null, [Validators.required]]
   });
 
   isValid(field: string): boolean | null {
@@ -89,6 +94,18 @@ export class CreateContratosComponent {
       error: (message) => {
         const messages = message.error?.errorMessage || message.message || 'Error desconocido';
         Swal.fire('Error', messages.toString(), 'error');
+      }
+    });
+  }
+
+  cargaResidentes() {
+    this.clientService.getUsers().subscribe({
+      next: (resp) => {
+        this.usuarios = resp.data;
+        this.usuarios.sort((a, b) => b.idUser - a.idUser);
+      },
+      error: (err) => {
+        console.error('Error al cargar roles:', err);
       }
     });
   }

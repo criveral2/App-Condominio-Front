@@ -14,4 +14,5 @@ export interface PropiedadData {
     propertyIdSection:    number;
     propertyType:         string;
     propertyOwner:        string;
+    userId:               number;
 }

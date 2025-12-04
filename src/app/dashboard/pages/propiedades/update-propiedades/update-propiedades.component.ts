@@ -9,6 +9,8 @@ import { Seccion } from '../../../interfaces/seccion/seccion.interface';
 import { TipoPropiedadData } from '../../../interfaces/Propiedad/tipo-propiedad.interface';
 import { PropiedadData } from '../../../interfaces/Propiedad/propiedad.interface';
 import { PropiedadService } from '../../../service/propiedad.service';
+import { ClientService } from '../../../service/client.service';
+import { User } from '../../../../auth/interfaces';
 @Component({
   selector: 'app-update-propiedades',
   templateUrl: './update-propiedades.component.html',
@@ -24,6 +26,8 @@ export class UpdatePropiedadesComponent {
   private fb = inject(FormBuilder);
   private propiedadService = inject(PropiedadService);
   public tipoPropiedades: TipoPropiedadData[] = [];
+    private clientService = inject(ClientService);
+     public usuarios: User[] = [];
 
 
   public myForm: FormGroup = this.fb.group({
@@ -31,6 +35,7 @@ export class UpdatePropiedadesComponent {
     propertyDescription: ['', [Validators.required, Validators.minLength(8)]],
     propertyValue: [1, [Validators.required, Validators.min(1)]],
     propertyIdType: [1, [Validators.required]],
+    userId: [null, [Validators.required]]
   });
 
   constructor() { }
@@ -43,6 +48,7 @@ export class UpdatePropiedadesComponent {
       },
       error: (err) => console.error('Error cargando tipos', err)
     });
+    this.cargaResidentes();
   }
 
   isValid(field: string): boolean | null {
@@ -81,7 +87,7 @@ export class UpdatePropiedadesComponent {
         propertyDimensions: this.propiedad.propertyDimensions,   // ojo aquí, en el JSON viene como "area comun"
         propertyDescription: this.propiedad.propertyDescription,
         propertyValue: this.propiedad.propertyValue,
-        propertyIdType: this.tipoPropiedades?.find(r => r.type == this.propiedad?.propertyType)?.id ?? 1 // buscar el id del tipo de area por su type;
+        propertyIdType: this.tipoPropiedades?.find(r => r.type == this.propiedad?.propertyType)?.id ?? 1, // buscar el id del tipo de area por su type;
       });
     }
     if (changes['soloLectura']) {
@@ -118,6 +124,18 @@ export class UpdatePropiedadesComponent {
       error: (message) => {
         const messages = message.error?.errorMessage || message.message || 'Error desconocido';
         Swal.fire('Error', messages.toString(), 'error');
+      }
+    });
+  }
+
+    cargaResidentes() {
+    this.clientService.getUsers().subscribe({
+      next: (resp) => {
+        this.usuarios = resp.data;
+        this.usuarios.sort((a, b) => b.idUser - a.idUser);
+      },
+      error: (err) => {
+        console.error('Error al cargar roles:', err);
       }
     });
   }

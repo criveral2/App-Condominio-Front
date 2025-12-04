@@ -21,6 +21,7 @@ export interface CreateContrato {
     amount:        number;
     idProperty:    number;
     idType:        number;
+    idUser:       number;
 }
 
 export interface UpdateContrato {

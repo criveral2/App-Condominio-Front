@@ -16,12 +16,20 @@
         <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="onUpdate()" class="space-y-4">
             <!-- Usuario y Propiedad -->
 
-            <!-- Usuario -->
+                 <!-- Residente -->
             <div>
-                <label for="username" class="block text-sm font-medium text-gray-600 mb-1">Usuario</label>
-                <span id="username"
-                    class="block w-full rounded-lg border border-gray-300 p-2 bg-gray-100 text-gray-700">{{contrato?.contractUser
-                    | userPipe}}</span>
+                <label for="idUser" class="block text-sm font-medium text-gray-600">
+                    Usuario
+                </label>
+
+                <ng-select id="idUser" name="idUser" [items]="usuarios || []" bindLabel="name" bindValue="idUser"
+                    formControlName="idUser" [searchable]="true" [clearable]="true"
+                    class="mt-1 block w-full rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-800">
+                </ng-select>
+
+                <span *ngIf="isValid('idUser')" class="text-xs text-red-500">
+                    {{ getFieldError('idUser') }}
+                </span>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

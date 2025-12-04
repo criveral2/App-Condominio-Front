@@ -9,6 +9,8 @@ import { Seccion } from '../../../interfaces/seccion/seccion.interface';
 import { ContratoData, CreateContrato, UpdateContratoData } from '../../../interfaces/contrato/contrato.interface';
 import { ContratoService } from '../../../service/contrato.service';
 import { TipoContrato, TipoContratoData } from '../../../interfaces/contrato/tipo-contrato.interface';
+import { ClientService } from '../../../service/client.service';
+import { User } from '../../../../auth/interfaces';
 
 @Component({
   selector: 'app-update-contratos',
@@ -27,14 +29,17 @@ export class UpdateContratosComponent {
   private fb = inject(FormBuilder);
   private contratoService = inject(ContratoService);
   public tipoArea: TipoArea | undefined;
-   public tipoContratos: TipoContratoData[] = [];
+  public tipoContratos: TipoContratoData[] = [];
   public updateContrato: CreateContrato | undefined;
+  private clientService = inject(ClientService);
+  public usuarios: User[] = [];
 
   public myForm: FormGroup = this.fb.group({
     signatureDate: [1, [Validators.required]],
     endDate: [1, [Validators.required]],
     amount: [1, [Validators.required, Validators.min(1)]],
     idType: [1, [Validators.required]],
+    idUser: [null, [Validators.required]]
   });
 
   constructor() { }
@@ -49,6 +54,7 @@ export class UpdateContratosComponent {
         console.error('Error al cargar las secciones:', err);
       }
     });
+    this.cargaResidentes();
   }
 
   // 👀 Cuando cambie el input usuario
@@ -59,6 +65,7 @@ export class UpdateContratosComponent {
         signatureDate: this.contrato.contractSignatureDate,
         endDate: this.contrato.contractEndDate,
         amount: this.contrato.contractAmount,
+        idUser: this.contrato.contractUser
       });
     }
     if (changes['soloLectura']) {
@@ -116,8 +123,21 @@ export class UpdateContratosComponent {
     });
   }
 
+  cargaResidentes() {
+    this.clientService.getUsers().subscribe({
+      next: (resp) => {
+        this.usuarios = resp.data;
+        this.usuarios.sort((a, b) => b.idUser - a.idUser);
+      },
+      error: (err) => {
+        console.error('Error al cargar roles:', err);
+      }
+    });
+  }
 
   onClose() {
     this.close.emit();
   }
+
+
 }
